@@ -161,3 +161,47 @@ margin-bottom:10px;
 .program-card p{
 color:#ddd;
 }
+.rj-team{
+padding:80px 20px;
+background:#111;
+text-align:center;
+}
+
+.rj-team h2{
+font-size:40px;
+color:#ff2d2d;
+margin-bottom:40px;
+}
+
+.team{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:30px;
+}
+
+.rj-card{
+background:#222;
+padding:20px;
+border-radius:15px;
+width:280px;
+transition:.4s;
+}
+
+.rj-card:hover{
+transform:translateY(-10px);
+}
+
+.rj-card img{
+width:100%;
+border-radius:12px;
+}
+
+.rj-card h3{
+margin-top:15px;
+color:#fff;
+}
+
+.rj-card p{
+color:#ccc;
+}
