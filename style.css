@@ -127,3 +127,37 @@ background:#fff;
 color:#ff2d2d;
 
 }
+.schedule{
+padding:80px 20px;
+background:#181818;
+text-align:center;
+}
+
+.schedule h2{
+font-size:40px;
+margin-bottom:40px;
+color:#ff2d2d;
+}
+
+.program-card{
+background:#252525;
+padding:25px;
+margin:15px auto;
+max-width:500px;
+border-radius:15px;
+transition:.3s;
+}
+
+.program-card:hover{
+transform:translateY(-5px);
+background:#333;
+}
+
+.program-card h3{
+color:#fff;
+margin-bottom:10px;
+}
+
+.program-card p{
+color:#ddd;
+}
