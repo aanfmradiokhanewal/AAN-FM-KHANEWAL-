@@ -1,1 +1,31 @@
+.top-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:#111;
+position:sticky;
+top:0;
+z-index:999;
+}
 
+.logo h2{
+color:#ff3b3b;
+}
+
+.logo p{
+color:#fff;
+font-size:14px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+font-weight:bold;
+transition:.3s;
+}
+
+nav a:hover{
+color:#ff3b3b;
+}
