@@ -17,3 +17,20 @@ slides[current].classList.add("active");
 }
 
 setInterval(showSlide,4000);
+window.onload=function(){
+
+document.getElementById("loader").style.display="none";
+
+}
+
+document.getElementById("topBtn").onclick=function(){
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+}
