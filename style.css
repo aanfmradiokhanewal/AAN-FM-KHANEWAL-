@@ -396,3 +396,12 @@ color:white;
 font-size:25px;
 cursor:pointer;
 }
+#liveClock{
+text-align:center;
+background:#c40000;
+color:#fff;
+padding:10px;
+font-size:18px;
+font-weight:bold;
+letter-spacing:1px;
+}
