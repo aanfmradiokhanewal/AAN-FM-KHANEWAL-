@@ -169,7 +169,7 @@ content="Listen Live AAN FM 91.60 Khanewal - Har Dil Ki Awaaz">
         </div>
 
 
-        <!-- LIVE RADIO -->
+<!-- LIVE RADIO -->
 <section id="live" class="live-player">
 
     <div class="live-badge">
@@ -196,21 +196,23 @@ content="Listen Live AAN FM 91.60 Khanewal - Har Dil Ki Awaaz">
 
         </div>
 
-        <a
-            href="https://aanfmkhanewal.radio12345.com"
-            target="_blank"
-            rel="noopener"
-            class="player-button">
+        <audio
+            id="aanLivePlayer"
+            controls
+            preload="none">
 
-            ▶ Listen Live
+            <source
+                src="http://fusion.shoutca.st:8266/"
+                type="audio/mpeg">
 
-        </a>
+            Your browser does not support the audio player.
+
+        </audio>
 
     </div>
 
     <p class="player-note">
-        🎧 Click <strong>Listen Live</strong>
-        to hear AAN FM 91.60 Live
+        🎧 Press ▶ to listen to AAN FM 91.60 Live
     </p>
 
 </section>
