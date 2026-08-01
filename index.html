@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AAN FM 91.60 Khanewal | Har Dil Ki Awaaz</title>
 
-<meta name="description" content="Listen Live AAN FM 91.60 Khanewal - Har Dil Ki Awaaz">
+<meta name="description"
+content="Listen Live AAN FM 91.60 Khanewal - Har Dil Ki Awaaz">
 
 <link rel="stylesheet" href="style.css">
 
@@ -14,215 +16,491 @@
 
 <body>
 
+<!-- LOADER -->
 <div id="loader">
-<h2>AAN FM 91.60 Khanewal</h2>
+    <div class="loader-content">
+        <div class="loader-radio">📻</div>
+        <h2>AAN FM 91.60</h2>
+        <p>Har Dil Ki Awaaz</p>
+    </div>
 </div>
 
-<div id="liveClock"></div>
 
+<!-- DATE & CLOCK AREA -->
+<section class="time-section">
+
+    <div class="clock-wrapper">
+
+        <!-- ANALOG CLOCK -->
+        <div class="analog-clock">
+
+            <div class="clock-number n12">12</div>
+            <div class="clock-number n3">3</div>
+            <div class="clock-number n6">6</div>
+            <div class="clock-number n9">9</div>
+
+            <div class="clock-hand hour-hand" id="hourHand"></div>
+            <div class="clock-hand minute-hand" id="minuteHand"></div>
+            <div class="clock-hand second-hand" id="secondHand"></div>
+
+            <div class="clock-center"></div>
+
+        </div>
+
+
+        <!-- DIGITAL CLOCK -->
+        <div class="digital-area">
+
+            <div class="digital-clock" id="digitalClock">
+                00:00:00
+            </div>
+
+            <div class="clock-status">
+                🔴 LIVE TIME — PAKISTAN
+            </div>
+
+            <div class="date-line english-date" id="englishDate"></div>
+
+            <div class="date-line islamic-date" id="islamicDate"></div>
+
+            <div class="date-line desi-date" id="desiDate"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HEADER -->
 <header>
 
-<div class="logo-area">
+    <div class="logo-area">
 
-<h1>📻 AAN FM 91.60 Khanewal</h1>
+        <h1>📻 AAN FM 91.60 Khanewal</h1>
 
-<p>Har Dil Ki Awaaz</p>
+        <p>Har Dil Ki Awaaz</p>
 
-</div>
+    </div>
 
-<nav>
 
-<a href="#">Home</a>
+    <nav>
 
-<a href="#live">Live</a>
+        <a href="#">Home</a>
 
-<a href="#schedule">Programs</a>
+        <a href="#live">🔴 Live</a>
 
-<a href="#rj">RJ Team</a>
+        <a href="#schedule">Programs</a>
 
-<a href="#gallery">Gallery</a>
+        <a href="#rj">RJ Team</a>
 
-<a href="#contact">Contact</a>
+        <a href="#gallery">Gallery</a>
 
-</nav>
+        <a href="#contact">Contact</a>
+
+    </nav>
 
 </header>
 
+
+<!-- HERO / SLIDER -->
 <section class="hero">
 
-<div class="slider">
+    <div class="slider">
 
-<div class="slide active">
 
-<h2>Welcome to AAN FM 91.60 Khanewal</h2>
+        <div class="slide active">
 
-<p>Har Dil Ki Awaaz</p>
+            <div class="slide-icon">📻</div>
 
-</div>
+            <h2>
+                Welcome to AAN FM 91.60 Khanewal
+            </h2>
 
-<div class="slide">
+            <p>
+                Har Dil Ki Awaaz
+            </p>
 
-<h2>Live Radio Streaming</h2>
+        </div>
 
-<p>Entertainment • News • Music</p>
 
-</div>
+        <div class="slide">
 
-<div class="slide">
+            <div class="slide-icon">🎙️</div>
 
-<h2>Listen Anywhere Anytime</h2>
+            <h2>
+                Live Radio Streaming
+            </h2>
 
-<p>Worldwide Streaming</p>
+            <p>
+                Entertainment • News • Music
+            </p>
 
-</div>
+        </div>
 
-</div>
 
-<section
-class="live-player">
+        <div class="slide">
+
+            <div class="slide-icon">🎧</div>
+
+            <h2>
+                Listen Anywhere Anytime
+            </h2>
+
+            <p>
+                Worldwide Streaming
+            </p>
+
+        </div>
+
+
+        <div class="slide">
+
+            <div class="slide-icon">📰</div>
+
+            <h2>
+                News • Entertainment • Music
+            </h2>
+
+            <p>
+                Your Voice • Your Radio • Your AAN FM
+            </p>
+
+        </div>
+
+
+        <!-- SLIDER DOTS -->
+
+        <div class="slider-dots">
+
+            <span class="dot active-dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LIVE RADIO -->
+<section id="live" class="live-player">
 
     <div class="live-badge">
         🔴 LIVE NOW
     </div>
 
-    <h2>AAN FM 91.60 Khanewal</h2>
+    <h2>
+        AAN FM 91.60 Khanewal
+    </h2>
 
-    <p>Har Dil Ki Awaaz</p>
+    <p>
+        Har Dil Ki Awaaz
+    </p>
+
 
     <div class="radio-player">
 
-        <div class="player-icon">📻</div>
+        <div class="player-icon">
+            📻
+        </div>
+
 
         <div class="player-info">
-            <strong>AAN FM 91.60</strong>
-            <span>Live Radio • Khanewal</span>
+
+            <strong>
+                AAN FM 91.60
+            </strong>
+
+            <span>
+                Live Radio • Khanewal
+            </span>
+
         </div>
+
 
         <a
             href="https://aanfmkhanewal.radio12345.com"
             target="_blank"
+            rel="noopener"
             class="player-button">
+
             ▶ Listen Live
+
         </a>
 
     </div>
 
+
     <p class="player-note">
-        🎧 Click Listen Live to hear AAN FM live
+
+        🎧 Click <strong>Listen Live</strong>
+        to hear AAN FM live
+
     </p>
+
 </section>
 
+
+<!-- PROGRAMS -->
 <section id="schedule" class="schedule">
 
-<h2>📅 Today's Programs</h2>
+    <h2>
+        📅 Today's Programs
+    </h2>
 
-<div class="program-card">
-<h3>🌅 Morning Show</h3>
-<p>06:00 AM – 10:00 AM</p>
-</div>
 
-<div class="program-card">
-<h3>🎶 Entertainment Time</h3>
-<p>10:00 AM – 02:00 PM</p>
-</div>
+    <div class="program-card">
 
-<div class="program-card">
-<h3>🎙️ Evening Show</h3>
-<p>08:00 PM – 10:00 PM</p>
-</div>
+        <h3>🌅 Morning Show</h3>
 
-<div class="program-card">
-<h3>🌙 Night Transmission</h3>
-<p>10:00 PM – 12:00 AM</p>
-</div>
+        <p>
+            06:00 AM – 10:00 AM
+        </p>
+
+    </div>
+
+
+    <div class="program-card">
+
+        <h3>🎶 Entertainment Time</h3>
+
+        <p>
+            10:00 AM – 02:00 PM
+        </p>
+
+    </div>
+
+
+    <div class="program-card">
+
+        <h3>🎙️ Evening Show</h3>
+
+        <p>
+            08:00 PM – 10:00 PM
+        </p>
+
+    </div>
+
+
+    <div class="program-card">
+
+        <h3>🌙 Night Transmission</h3>
+
+        <p>
+            10:00 PM – 12:00 AM
+        </p>
+
+    </div>
 
 </section>
 
+
+<!-- RJ TEAM -->
 <section id="rj" class="rj-team">
 
-<h2>🎙️ Meet Our RJs</h2>
+    <h2>
+        🎙️ Meet Our RJs
+    </h2>
 
-<div class="team">
 
-<div class="rj-card">
-<img src="https://via.placeholder.com/250x250" alt="RJ Bilal Shaheen">
-<h3>RJ Bilal Shaheen</h3>
-<p>Radio Host</p>
-</div>
+    <div class="team">
 
-<div class="rj-card">
-<img src="https://via.placeholder.com/250x250" alt="RJ Irfan">
-<h3>RJ Irfan</h3>
-<p>Program Host</p>
-</div>
 
-<div class="rj-card">
-<img src="https://via.placeholder.com/250x250" alt="RJ GN Khan">
-<h3>RJ GN Khan</h3>
-<p>Program Host</p>
-</div>
+        <div class="rj-card">
 
-</div>
+            <img
+            src="https://via.placeholder.com/250x250"
+            alt="RJ Bilal Shaheen">
+
+            <h3>
+                RJ Bilal Shaheen
+            </h3>
+
+            <p>
+                Radio Host
+            </p>
+
+        </div>
+
+
+        <div class="rj-card">
+
+            <img
+            src="https://via.placeholder.com/250x250"
+            alt="RJ Irfan">
+
+            <h3>
+                RJ Irfan
+            </h3>
+
+            <p>
+                Program Host
+            </p>
+
+        </div>
+
+
+        <div class="rj-card">
+
+            <img
+            src="https://via.placeholder.com/250x250"
+            alt="RJ GN Khan">
+
+            <h3>
+                RJ GN Khan
+            </h3>
+
+            <p>
+                Program Host
+            </p>
+
+        </div>
+
+
+    </div>
 
 </section>
+
+
+<!-- GALLERY -->
 <section id="gallery" class="gallery">
 
-<h2>📸 Gallery</h2>
+    <h2>
+        📸 Gallery
+    </h2>
 
-<div class="gallery-grid">
 
-<img src="https://picsum.photos/400/300?random=1" alt="Gallery 1">
+    <div class="gallery-grid">
 
-<img src="https://picsum.photos/400/300?random=2" alt="Gallery 2">
+        <img
+        src="https://picsum.photos/400/300?random=1"
+        alt="AAN FM Gallery 1">
 
-<img src="https://picsum.photos/400/300?random=3" alt="Gallery 3">
+        <img
+        src="https://picsum.photos/400/300?random=2"
+        alt="AAN FM Gallery 2">
 
-<img src="https://picsum.photos/400/300?random=4" alt="Gallery 4">
+        <img
+        src="https://picsum.photos/400/300?random=3"
+        alt="AAN FM Gallery 3">
 
-<img src="https://picsum.photos/400/300?random=5" alt="Gallery 5">
+        <img
+        src="https://picsum.photos/400/300?random=4"
+        alt="AAN FM Gallery 4">
 
-<img src="https://picsum.photos/400/300?random=6" alt="Gallery 6">
+        <img
+        src="https://picsum.photos/400/300?random=5"
+        alt="AAN FM Gallery 5">
 
-</div>
+        <img
+        src="https://picsum.photos/400/300?random=6"
+        alt="AAN FM Gallery 6">
+
+    </div>
 
 </section>
 
+
+<!-- CONTACT -->
 <section id="contact" class="contact">
 
-<h2>📞 Contact Us</h2>
+    <h2>
+        📞 Contact Us
+    </h2>
 
-<p><strong>Station:</strong> AAN FM 91.60 Khanewal</p>
 
-<p><strong>Address:</strong> SB Media Group, HBL Plaza, Ahl-e-Hadees Chowk, Khanewal</p>
+    <p>
+        <strong>Station:</strong>
+        AAN FM 91.60 Khanewal
+    </p>
 
-<p><strong>Live Call:</strong> 0327-7647292</p>
 
-<p><strong>WhatsApp:</strong> 03111177102</p>
+    <p>
+        <strong>Address:</strong>
+        SB Media Group, HBL Plaza,
+        Ahl-e-Hadees Chowk, Khanewal
+    </p>
 
-<p><strong>SMS:</strong> KWL [space] Name [space] City [space] Message → 8881</p>
 
-<div class="social">
+    <p>
+        <strong>Live Call:</strong>
+        0327-7647292
+    </p>
 
-<a href="https://www.facebook.com/bolofm143" target="_blank">📘 Facebook</a>
 
-<a href="https://wa.me/923111177102" target="_blank">📱 WhatsApp</a>
+    <p>
+        <strong>WhatsApp:</strong>
+        03111177102
+    </p>
 
-</div>
+
+    <p>
+        <strong>SMS:</strong>
+        KWL [space] Name [space] City
+        [space] Message → 8881
+    </p>
+
+
+    <div class="social">
+
+        <a
+        href="https://www.facebook.com/bolofm143"
+        target="_blank"
+        rel="noopener">
+
+            📘 Facebook
+
+        </a>
+
+
+        <a
+        href="https://wa.me/923111177102"
+        target="_blank"
+        rel="noopener">
+
+            📱 WhatsApp
+
+        </a>
+
+    </div>
 
 </section>
 
+
+<!-- FOOTER -->
 <footer>
 
-<p>© 2026 AAN FM 91.60 Khanewal | Har Dil Ki Awaaz</p>
+    <p>
+        © 2026 AAN FM 91.60 Khanewal |
+        Har Dil Ki Awaaz
+    </p>
 
 </footer>
 
-<a href="https://wa.me/923111177102" class="whatsapp" target="_blank">💬</a>
 
-<button id="topBtn">⬆</button>
+<!-- FLOATING WHATSAPP -->
+<a
+href="https://wa.me/923111177102"
+class="whatsapp"
+target="_blank"
+rel="noopener">
 
+    💬
+
+</a>
+
+
+<!-- BACK TO TOP -->
+<button id="topBtn">
+    ⬆
+</button>
+
+
+<!-- JAVASCRIPT -->
 <script src="script.js"></script>
 
 </body>
-  </html>
-  
+</html>
