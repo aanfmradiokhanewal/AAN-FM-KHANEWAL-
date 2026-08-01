@@ -172,7 +172,7 @@ content="Listen Live AAN FM 91.60 Khanewal - Har Dil Ki Awaaz">
 </section>
 
 
-<!-- LIVE RADIO -->
+<!-- LIVE RADIO PLAYER -->
 <section id="live" class="live-player">
 
     <div class="live-badge">
@@ -211,6 +211,21 @@ content="Listen Live AAN FM 91.60 Khanewal - Har Dil Ki Awaaz">
     </p>
 
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const player = document.getElementById("aanLivePlayer");
+
+    if (!player) return;
+
+    player.addEventListener("error", function () {
+        console.log("AAN FM stream could not be loaded.");
+    });
+
+});
+</script>
+    
 <!-- FPC CALENDAR -->
 <section class="live-calendar" id="programCalendar">
 
