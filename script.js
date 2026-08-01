@@ -83,23 +83,22 @@ document.addEventListener("DOMContentLoaded", function () {
            ISLAMIC / HIJRI DATE
         ========================= */
 
-        const islamicDate =
-            new Intl.DateTimeFormat(
-                "en-TN-u-ca-islamic",
-                {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                }
-            ).format(now);
+const islamicDate =
+    new Intl.DateTimeFormat(
+        "ur-PK-u-ca-islamic",
+        {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
+    ).format(now);
 
         const islamicElement =
             document.getElementById("islamicDate");
 
         if (islamicElement) {
             islamicElement.textContent =
-                "🌙 " + islamicDate + " AH";
-        }
+    "🌙 " + islamicDate;
 
 
         /* =========================
