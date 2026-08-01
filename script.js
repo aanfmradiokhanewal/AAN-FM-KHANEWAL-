@@ -56,3 +56,10 @@ document.getElementById("liveClock").innerHTML =
 setInterval(updateClock,1000);
 
 updateClock();
+function playRadio(){
+
+const player = document.getElementById("radioPlayer");
+
+player.play();
+
+}
