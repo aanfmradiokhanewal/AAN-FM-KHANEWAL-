@@ -242,13 +242,55 @@ content="Listen Live AAN FM 91.60 Khanewal - Har Dil Ki Awaaz">
     </p>
 
 </section>
+<section class="live-calendar" id="programCalendar">
 
+    <div class="calendar-header">
 
+        <button id="prevMonth">‹</button>
+
+        <div>
+            <h2 id="calendarMonth">August 2026</h2>
+            <p id="calendarToday">📻 FPC Program Schedule</p>
+        </div>
+
+        <button id="nextMonth">›</button>
+
+    </div>
+
+    <div class="calendar-weekdays">
+        <span>Sun</span>
+        <span>Mon</span>
+        <span>Tue</span>
+        <span>Wed</span>
+        <span>Thu</span>
+        <span>Fri</span>
+        <span>Sat</span>
+    </div>
+
+    <div id="calendarDays" class="calendar-days"></div>
+
+    <div class="calendar-info">
+        <div id="calendarEnglish"></div>
+        <div id="calendarHijri"></div>
+        <div id="calendarDesi"></div>
+    </div>
+
+    <div class="daily-programs">
+
+        <h3 id="selectedDayTitle">
+            📻 Select a Date
+        </h3>
+
+        <div id="dailyProgramList"></div>
+
+    </div>
+
+</section>
 <!-- PROGRAMS -->
 <section id="schedule" class="schedule">
 
     <h2>
-        📅 Today's Programs
+         Today's Programs
     </h2>
 
 
