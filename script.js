@@ -1,27 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
-       AAN FM 91.60 KHANEWAL
-       MAIN CLOCK + DATES
+       LIVE CLOCK + DATES
     ===================================================== */
 
     function updateTime() {
 
         const now = new Date();
 
-        /* -------------------------
-           DIGITAL CLOCK
-        ------------------------- */
+        /* ---------- DIGITAL CLOCK ---------- */
 
         const hours = now.getHours();
         const minutes = now.getMinutes();
         const seconds = now.getSeconds();
 
         let displayHour = hours % 12;
-
-        if (displayHour === 0) {
-            displayHour = 12;
-        }
+        if (displayHour === 0) displayHour = 12;
 
         const ampm = hours >= 12 ? "PM" : "AM";
 
@@ -39,9 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* -------------------------
-           ANALOG CLOCK
-        ------------------------- */
+        /* ---------- ANALOG CLOCK ---------- */
 
         const hourHand =
             document.getElementById("hourHand");
@@ -52,16 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const secondHand =
             document.getElementById("secondHand");
 
-
-        const secondDegree =
-            seconds * 6;
+        const secondDegree = seconds * 6;
 
         const minuteDegree =
             minutes * 6 + seconds * 0.1;
 
         const hourDegree =
-            (hours % 12) * 30 +
-            minutes * 0.5;
+            (hours % 12) * 30 + minutes * 0.5;
 
 
         if (secondHand) {
@@ -80,49 +69,53 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* -------------------------
+        /* =================================================
            ENGLISH DATE
-        ------------------------- */
+        ================================================= */
+
+        const englishDate =
+            now.toLocaleDateString("en-PK", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            });
 
         const englishElement =
             document.getElementById("englishDate");
 
-
         if (englishElement) {
-
-            const englishDate =
-                now.toLocaleDateString(
-                    "en-PK",
-                    {
-                        weekday: "long",
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric"
-                    }
-                );
-
             englishElement.textContent =
                 "📅 " + englishDate;
         }
 
 
-        /* -------------------------
+        /* =================================================
            ISLAMIC / HIJRI DATE
-        ------------------------- */
+           Umm al-Qura Calendar
+        ================================================= */
 
-        const islamicElement =
-            document.getElementById("islamicDate");
+        let islamicDate = "";
 
+        try {
 
-        if (islamicElement) {
+            islamicDate =
+                new Intl.DateTimeFormat(
+                    "en-PK-u-ca-islamic-umalqura",
+                    {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
+                    }
+                ).format(now);
 
-            let islamicDate = "";
+        } catch (error) {
 
             try {
 
                 islamicDate =
                     new Intl.DateTimeFormat(
-                        "en-PK-u-ca-islamic-umalqura",
+                        "en-PK-u-ca-islamic",
                         {
                             day: "numeric",
                             month: "long",
@@ -130,151 +123,57 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     ).format(now);
 
-            } catch (error) {
+            } catch (error2) {
 
-                try {
-
-                    islamicDate =
-                        new Intl.DateTimeFormat(
-                            "en-PK-u-ca-islamic",
-                            {
-                                day: "numeric",
-                                month: "long",
-                                year: "numeric"
-                            }
-                        ).format(now);
-
-                } catch (secondError) {
-
-                    islamicDate = "";
-
-                }
-            }
-
-
-            if (islamicDate) {
-
-                islamicElement.textContent =
-                    "🌙 " + islamicDate + " AH";
-
-            } else {
-
-                islamicElement.textContent =
-                    "🌙 Islamic Date";
+                islamicDate = "";
 
             }
 
         }
 
+        const islamicElement =
+            document.getElementById("islamicDate");
 
-        /* -------------------------
+        if (islamicElement) {
+
+            islamicElement.textContent =
+                islamicDate
+                    ? "🌙 " + islamicDate + " AH"
+                    : "🌙 Islamic Date";
+
+        }
+
+
+        /* =================================================
            DESI / PUNJABI MONTH
-        ------------------------- */
+        ================================================= */
+
+        const desiMonths = [
+            "Chet",
+            "Vaisakh",
+            "Jeth",
+            "Harh",
+            "Sawan",
+            "Bhadon",
+            "Assu",
+            "Katak",
+            "Maghar",
+            "Poh",
+            "Magh",
+            "Phagun"
+        ];
+
+        const monthIndex =
+            now.getMonth();
 
         const desiElement =
             document.getElementById("desiDate");
 
-
         if (desiElement) {
 
-            const month = now.getMonth();
-            const day = now.getDate();
-
-            let desiMonth = "";
-
-            /*
-             Approximate Punjabi/Bikrami seasonal
-             month display.
-
-             Vaisakh: Apr 14 – May 14
-             Jeth:    May 15 – Jun 14
-             Harh:    Jun 15 – Jul 15
-             Sawan:   Jul 16 – Aug 16
-             Bhadon:  Aug 17 – Sep 16
-             Assu:    Sep 17 – Oct 16
-             Katak:   Oct 17 – Nov 15
-             Maghar:  Nov 16 – Dec 15
-             Poh:     Dec 16 – Jan 13
-             Magh:    Jan 14 – Feb 12
-             Phagun:  Feb 13 – Mar 13
-             Chet:    Mar 14 – Apr 13
-            */
-
-            if (
-                (month === 3 && day >= 14) ||
-                (month === 4 && day <= 14)
-            ) {
-                desiMonth = "Vaisakh";
-
-            } else if (
-                (month === 4 && day >= 15) ||
-                (month === 5 && day <= 14)
-            ) {
-                desiMonth = "Jeth";
-
-            } else if (
-                (month === 5 && day >= 15) ||
-                (month === 6 && day <= 15)
-            ) {
-                desiMonth = "Harh";
-
-            } else if (
-                (month === 6 && day >= 16) ||
-                (month === 7 && day <= 16)
-            ) {
-                desiMonth = "Sawan";
-
-            } else if (
-                (month === 7 && day >= 17) ||
-                (month === 8 && day <= 16)
-            ) {
-                desiMonth = "Bhadon";
-
-            } else if (
-                (month === 8 && day >= 17) ||
-                (month === 9 && day <= 16)
-            ) {
-                desiMonth = "Assu";
-
-            } else if (
-                (month === 9 && day >= 17) ||
-                (month === 10 && day <= 15)
-            ) {
-                desiMonth = "Katak";
-
-            } else if (
-                (month === 10 && day >= 16) ||
-                (month === 11 && day <= 15)
-            ) {
-                desiMonth = "Maghar";
-
-            } else if (
-                (month === 11 && day >= 16) ||
-                (month === 0 && day <= 13)
-            ) {
-                desiMonth = "Poh";
-
-            } else if (
-                (month === 0 && day >= 14) ||
-                (month === 1 && day <= 12)
-            ) {
-                desiMonth = "Magh";
-
-            } else if (
-                (month === 1 && day >= 13) ||
-                (month === 2 && day <= 13)
-            ) {
-                desiMonth = "Phagun";
-
-            } else {
-
-                desiMonth = "Chet";
-
-            }
-
-
             desiElement.textContent =
-                "🌾 Desi Month: " + desiMonth;
+                "🌾 Desi Month: " +
+                desiMonths[monthIndex];
 
         }
 
@@ -284,7 +183,6 @@ document.addEventListener("DOMContentLoaded", function () {
     updateTime();
 
     setInterval(updateTime, 1000);
-
 
 
     /* =====================================================
@@ -306,13 +204,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-
         slides.forEach(function (slide) {
 
             slide.classList.remove("active");
 
         });
-
 
         dots.forEach(function (dot) {
 
@@ -326,7 +222,6 @@ document.addEventListener("DOMContentLoaded", function () {
             slides[index].classList.add("active");
 
         }
-
 
         if (dots[index]) {
 
@@ -346,13 +241,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             currentSlide++;
 
-            if (
-                currentSlide >=
-                slides.length
-            ) {
-
+            if (currentSlide >= slides.length) {
                 currentSlide = 0;
-
             }
 
             showSlide(currentSlide);
@@ -368,19 +258,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     dots.forEach(function (dot, index) {
 
-        dot.addEventListener(
-            "click",
-            function () {
+        dot.addEventListener("click", function () {
 
-                currentSlide = index;
+            currentSlide = index;
 
-                showSlide(currentSlide);
+            showSlide(currentSlide);
 
-            }
-        );
+        });
 
     });
-
 
 
     /* =====================================================
@@ -390,46 +276,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const topButton =
         document.getElementById("topBtn");
 
-
     if (topButton) {
 
-        window.addEventListener(
-            "scroll",
-            function () {
+        window.addEventListener("scroll", function () {
 
-                if (
-                    window.scrollY >
-                    400
-                ) {
+            if (window.scrollY > 400) {
 
-                    topButton.style.display =
-                        "block";
+                topButton.style.display = "block";
 
-                } else {
+            } else {
 
-                    topButton.style.display =
-                        "none";
-
-                }
+                topButton.style.display = "none";
 
             }
-        );
+
+        });
 
 
-        topButton.addEventListener(
-            "click",
-            function () {
+        topButton.addEventListener("click", function () {
 
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
 
-            }
-        );
+        });
 
     }
-
 
 
     /* =====================================================
@@ -439,21 +312,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const loader =
         document.getElementById("loader");
 
-
     if (loader) {
 
         setTimeout(function () {
 
             loader.style.opacity = "0";
-
             loader.style.transition =
                 "opacity 0.5s ease";
 
-
             setTimeout(function () {
 
-                loader.style.display =
-                    "none";
+                loader.style.display = "none";
 
             }, 500);
 
@@ -464,458 +333,111 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
 /* =========================================================
    AAN FM 91.60 KHANEWAL
-   FPC PROGRAM SCHEDULE
-   AUGUST + SEPTEMBER 2026
+   FPC — AUGUST & SEPTEMBER 2026
 ========================================================= */
-
 
 const fpcSchedule = {
 
-    /* =========================
-       SUNDAY
-    ========================= */
-
-    0: [
-
-        [
-            "06:00 AM – 09:00 AM",
-            "RJ Parviaz Ahmad",
-            "Good Morning Pakistan"
-        ],
-
-        [
-            "09:00 AM – 10:00 AM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "10:00 AM – 12:00 PM",
-            "RJ Ghulam Nabi",
-            ""
-        ],
-
-        [
-            "12:00 PM – 02:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "02:00 PM – 04:00 PM",
-            "RJ Maher Akmal Sial",
-            ""
-        ],
-
-        [
-            "04:00 PM – 06:00 PM",
-            "RJ Hussain Raaz",
-            ""
-        ],
-
-        [
-            "06:00 PM – 08:00 PM",
-            "RJ Maher Hafeez",
-            "Mehfil Sajna Di"
-        ],
-
-        [
-            "08:00 PM – 10:00 PM",
-            "RJ Munawar Shehzad",
-            ""
-        ],
-
-        [
-            "10:00 PM – 12:00 AM",
-            "RJ Tahir Warsi",
-            "Shabe-Ghazal"
-        ]
-
-    ],
-
-
-    /* =========================
-       MONDAY
-    ========================= */
-
+    /* MONDAY */
     1: [
-
-        [
-            "06:00 AM – 09:00 AM",
-            "Shafqat Bukhari",
-            "Good Morning Pakistan"
-        ],
-
-        [
-            "09:00 AM – 10:00 AM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "10:00 AM – 12:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "12:00 PM – 02:00 PM",
-            "RJ Maher Akmal Sial",
-            ""
-        ],
-
-        [
-            "02:00 PM – 04:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "04:00 PM – 06:00 PM",
-            "RJ Wasim Sajjad",
-            ""
-        ],
-
-        [
-            "06:00 PM – 08:00 PM",
-            "RJ Maher Hafeez",
-            "Mehfil Sajna Di"
-        ],
-
-        [
-            "08:00 PM – 10:00 PM",
-            "RJ Shafqat Bukhari",
-            ""
-        ],
-
-        [
-            "10:00 PM – 12:00 AM",
-            "Love Beats With RJ Nazi Naz",
-            ""
-        ]
-
+        ["06:00 AM – 09:00 AM", "Shafqat Bukhari", "Good Morning Pakistan"],
+        ["09:00 AM – 10:00 AM", "B-2-B", ""],
+        ["10:00 AM – 12:00 PM", "B-2-B", ""],
+        ["12:00 PM – 02:00 PM", "RJ Maher Akmal Sial", ""],
+        ["02:00 PM – 04:00 PM", "B-2-B", ""],
+        ["04:00 PM – 06:00 PM", "RJ Wasim Sajjad", ""],
+        ["06:00 PM – 08:00 PM", "RJ Maher Hafeez", "Mehfil Sajna Di"],
+        ["08:00 PM – 10:00 PM", "RJ Shafqat Bukhari", ""],
+        ["10:00 PM – 12:00 AM", "Love Beats With RJ Nazi Naz", ""]
     ],
 
 
-    /* =========================
-       TUESDAY
-    ========================= */
-
+    /* TUESDAY */
     2: [
-
-        [
-            "06:00 AM – 09:00 AM",
-            "Shafqat Bukhari",
-            "Good Morning Pakistan"
-        ],
-
-        [
-            "09:00 AM – 10:00 AM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "10:00 AM – 12:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "12:00 PM – 02:00 PM",
-            "RJ Munawar Shehzad",
-            ""
-        ],
-
-        [
-            "02:00 PM – 04:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "04:00 PM – 06:00 PM",
-            "RJ Khasta Gull",
-            ""
-        ],
-
-        [
-            "06:00 PM – 08:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "08:00 PM – 10:00 PM",
-            "RJ Shafqat Bukhari",
-            ""
-        ],
-
-        [
-            "10:00 PM – 12:00 AM",
-            "RJ Saif ur Rehman Hashmi",
-            ""
-        ]
-
+        ["06:00 AM – 09:00 AM", "Shafqat Bukhari", "Good Morning Pakistan"],
+        ["09:00 AM – 10:00 AM", "B-2-B", ""],
+        ["10:00 AM – 12:00 PM", "B-2-B", ""],
+        ["12:00 PM – 02:00 PM", "RJ Munawar Shehzad", ""],
+        ["02:00 PM – 04:00 PM", "B-2-B", ""],
+        ["04:00 PM – 06:00 PM", "RJ Khasta Gull", ""],
+        ["06:00 PM – 08:00 PM", "B-2-B", ""],
+        ["08:00 PM – 10:00 PM", "RJ Shafqat Bukhari", ""],
+        ["10:00 PM – 12:00 AM", "RJ Saif ur Rehman Hashmi", ""]
     ],
 
 
-    /* =========================
-       WEDNESDAY
-    ========================= */
-
+    /* WEDNESDAY */
     3: [
-
-        [
-            "06:00 AM – 09:00 AM",
-            "Shafqat Bukhari",
-            "Good Morning Pakistan"
-        ],
-
-        [
-            "09:00 AM – 10:00 AM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "10:00 AM – 12:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "12:00 PM – 02:00 PM",
-            "RJ Ghulam Nabi",
-            ""
-        ],
-
-        [
-            "02:00 PM – 04:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "04:00 PM – 06:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "06:00 PM – 08:00 PM",
-            "RJ Maher Hafeez",
-            "Mehfil Sajna Di"
-        ],
-
-        [
-            "08:00 PM – 10:00 PM",
-            "RJ Latif Khan Qalandrani",
-            ""
-        ],
-
-        [
-            "10:00 PM – 12:00 AM",
-            "Shafqat Bukhari",
-            "Raat Baat Karti Hai"
-        ]
-
+        ["06:00 AM – 09:00 AM", "Shafqat Bukhari", "Good Morning Pakistan"],
+        ["09:00 AM – 10:00 AM", "B-2-B", ""],
+        ["10:00 AM – 12:00 PM", "B-2-B", ""],
+        ["12:00 PM – 02:00 PM", "RJ Ghulam Nabi", ""],
+        ["02:00 PM – 04:00 PM", "B-2-B", ""],
+        ["04:00 PM – 06:00 PM", "B-2-B", ""],
+        ["06:00 PM – 08:00 PM", "RJ Maher Hafeez", "Mehfil Sajna Di"],
+        ["08:00 PM – 10:00 PM", "RJ Latif Khan Qalandrani", ""],
+        ["10:00 PM – 12:00 AM", "Shafqat Bukhari", "Raat Baat Karti Hai"]
     ],
 
 
-    /* =========================
-       THURSDAY
-    ========================= */
-
+    /* THURSDAY */
     4: [
-
-        [
-            "06:00 AM – 09:00 AM",
-            "Shafqat Bukhari",
-            "Good Morning Pakistan"
-        ],
-
-        [
-            "09:00 AM – 10:00 AM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "10:00 AM – 12:00 PM",
-            "RJ Maher Akmal Sial",
-            ""
-        ],
-
-        [
-            "12:00 PM – 02:00 PM",
-            "RJ Munawar Shehzad",
-            ""
-        ],
-
-        [
-            "02:00 PM – 04:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "04:00 PM – 06:00 PM",
-            "RJ Abdul Razaq Zahid",
-            ""
-        ],
-
-        [
-            "06:00 PM – 08:00 PM",
-            "RJ Ghulam Nabi",
-            ""
-        ],
-
-        [
-            "08:00 PM – 10:00 PM",
-            "RJ Bilal Shaheen",
-            ""
-        ],
-
-        [
-            "10:00 PM – 12:00 AM",
-            "Shafqat Bukhari",
-            "Raat Baat Karti Hai"
-        ]
-
+        ["06:00 AM – 09:00 AM", "Shafqat Bukhari", "Good Morning Pakistan"],
+        ["09:00 AM – 10:00 AM", "B-2-B", ""],
+        ["10:00 AM – 12:00 PM", "RJ Maher Akmal Sial", ""],
+        ["12:00 PM – 02:00 PM", "RJ Munawar Shehzad", ""],
+        ["02:00 PM – 04:00 PM", "B-2-B", ""],
+        ["04:00 PM – 06:00 PM", "RJ Abdul Razaq Zahid", ""],
+        ["06:00 PM – 08:00 PM", "RJ Ghulam Nabi", ""],
+        ["08:00 PM – 10:00 PM", "RJ Bilal Shaheen", ""],
+        ["10:00 PM – 12:00 AM", "Shafqat Bukhari", "Raat Baat Karti Hai"]
     ],
 
 
-    /* =========================
-       FRIDAY
-    ========================= */
-
+    /* FRIDAY */
     5: [
-
-        [
-            "06:00 AM – 09:00 AM",
-            "RJ Parviaz Ahmad",
-            "Good Morning Pakistan"
-        ],
-
-        [
-            "09:00 AM – 10:00 AM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "10:00 AM – 12:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "12:00 PM – 02:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "02:00 PM – 04:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "04:00 PM – 06:00 PM",
-            "RJ Abdul Razaq Zahid",
-            ""
-        ],
-
-        [
-            "06:00 PM – 08:00 PM",
-            "RJ Hussain Raaz",
-            ""
-        ],
-
-        [
-            "08:00 PM – 10:00 PM",
-            "RJ Latif Khan Qalandrani",
-            ""
-        ],
-
-        [
-            "10:00 PM – 12:00 AM",
-            "RJ Khalid Mirza",
-            "Chalo Humjan Hojain"
-        ]
-
+        ["06:00 AM – 09:00 AM", "RJ Parviaz Ahmad", "Good Morning Pakistan"],
+        ["09:00 AM – 10:00 AM", "B-2-B", ""],
+        ["10:00 AM – 12:00 PM", "B-2-B", ""],
+        ["12:00 PM – 02:00 PM", "B-2-B", ""],
+        ["02:00 PM – 04:00 PM", "B-2-B", ""],
+        ["04:00 PM – 06:00 PM", "RJ Abdul Razaq Zahid", ""],
+        ["06:00 PM – 08:00 PM", "RJ Hussain Raaz", ""],
+        ["08:00 PM – 10:00 PM", "RJ Latif Khan Qalandrani", ""],
+        ["10:00 PM – 12:00 AM", "RJ Khalid Mirza", "Chalo Humjan Hojain"]
     ],
 
 
-    /* =========================
-       SATURDAY
-    ========================= */
-
+    /* SATURDAY */
     6: [
+        ["06:00 AM – 09:00 AM", "RJ Parviaz Ahmad", "Good Morning Pakistan"],
+        ["09:00 AM – 10:00 AM", "B-2-B", ""],
+        ["10:00 AM – 12:00 PM", "RJ Ghulam Nabi", ""],
+        ["12:00 PM – 02:00 PM", "B-2-B", ""],
+        ["02:00 PM – 04:00 PM", "RJ Muskan Khan", ""],
+        ["04:00 PM – 06:00 PM", "RJ Tabbasum", ""],
+        ["06:00 PM – 08:00 PM", "RJ Maher Akmal Sial", ""],
+        ["08:00 PM – 10:00 PM", "RJ Munawar Shehzad", ""],
+        ["10:00 PM – 12:00 AM", "RJ Parviaz Ahmad", "Haar Hamelan"]
+    ],
 
-        [
-            "06:00 AM – 09:00 AM",
-            "RJ Parviaz Ahmad",
-            "Good Morning Pakistan"
-        ],
 
-        [
-            "09:00 AM – 10:00 AM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "10:00 AM – 12:00 PM",
-            "RJ Ghulam Nabi",
-            ""
-        ],
-
-        [
-            "12:00 PM – 02:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "02:00 PM – 04:00 PM",
-            "RJ Muskan Khan",
-            ""
-        ],
-
-        [
-            "04:00 PM – 06:00 PM",
-            "RJ Tabbasum",
-            ""
-        ],
-
-        [
-            "06:00 PM – 08:00 PM",
-            "RJ Maher Akmal Sial",
-            ""
-        ],
-
-        [
-            "08:00 PM – 10:00 PM",
-            "RJ Munawar Shehzad",
-            ""
-        ],
-
-        [
-            "10:00 PM – 12:00 AM",
-            "RJ Parviaz Ahmad",
-            "Haar Hamelan"
-        ]
-
+    /* SUNDAY */
+    0: [
+        ["06:00 AM – 09:00 AM", "RJ Parviaz Ahmad", "Good Morning Pakistan"],
+        ["09:00 AM – 10:00 AM", "B-2-B", ""],
+        ["10:00 AM – 12:00 PM", "RJ Ghulam Nabi", ""],
+        ["12:00 PM – 02:00 PM", "B-2-B", ""],
+        ["02:00 PM – 04:00 PM", "RJ Maher Akmal Sial", ""],
+        ["04:00 PM – 06:00 PM", "RJ Hussain Raaz", ""],
+        ["06:00 PM – 08:00 PM", "RJ Maher Hafeez", "Mehfil Sajna Di"],
+        ["08:00 PM – 10:00 PM", "RJ Munawar Shehzad", ""],
+        ["10:00 PM – 12:00 AM", "RJ Tahir Warsi", "Shabe-Ghazal"]
     ]
 
 };
-
 
 
 /* =========================================================
@@ -960,221 +482,8 @@ const nextMonth =
     document.getElementById("nextMonth");
 
 
-
 /* =========================================================
-   HIJRI DATE FUNCTION
-========================================================= */
-
-function getHijriDate(date) {
-
-    try {
-
-        return new Intl.DateTimeFormat(
-            "en-PK-u-ca-islamic-umalqura",
-            {
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            }
-        ).format(date);
-
-    } catch (error) {
-
-        try {
-
-            return new Intl.DateTimeFormat(
-                "en-PK-u-ca-islamic",
-                {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                }
-            ).format(date);
-
-        } catch (secondError) {
-
-            return "";
-
-        }
-
-    }
-
-}
-
-
-
-/* =========================================================
-   CALENDAR DESI MONTH
-========================================================= */
-
-function getDesiMonth(date) {
-
-    const month =
-        date.getMonth();
-
-    const day =
-        date.getDate();
-
-
-    if (
-        (month === 3 && day >= 14) ||
-        (month === 4 && day <= 14)
-    ) {
-        return "Vaisakh";
-    }
-
-
-    if (
-        (month === 4 && day >= 15) ||
-        (month === 5 && day <= 14)
-    ) {
-        return "Jeth";
-    }
-
-
-    if (
-        (month === 5 && day >= 15) ||
-        (month === 6 && day <= 15)
-    ) {
-        return "Harh";
-    }
-
-
-    if (
-        (month === 6 && day >= 16) ||
-        (month === 7 && day <= 16)
-    ) {
-        return "Sawan";
-    }
-
-
-    if (
-        (month === 7 && day >= 17) ||
-        (month === 8 && day <= 16)
-    ) {
-        return "Bhadon";
-    }
-
-
-    if (
-        (month === 8 && day >= 17) ||
-        (month === 9 && day <= 16)
-    ) {
-        return "Assu";
-    }
-
-
-    if (
-        (month === 9 && day >= 17) ||
-        (month === 10 && day <= 15)
-    ) {
-        return "Katak";
-    }
-
-
-    if (
-        (month === 10 && day >= 16) ||
-        (month === 11 && day <= 15)
-    ) {
-        return "Maghar";
-    }
-
-
-    if (
-        (month === 11 && day >= 16) ||
-        (month === 0 && day <= 13)
-    ) {
-        return "Poh";
-    }
-
-
-    if (
-        (month === 0 && day >= 14) ||
-        (month === 1 && day <= 12)
-    ) {
-        return "Magh";
-    }
-
-
-    if (
-        (month === 1 && day >= 13) ||
-        (month === 2 && day <= 13)
-    ) {
-        return "Phagun";
-    }
-
-
-    return "Chet";
-
-}
-
-
-
-/* =========================================================
-   UPDATE CALENDAR DATES
-========================================================= */
-
-function updateCalendarDates(date) {
-
-    const english =
-        date.toLocaleDateString(
-            "en-PK",
-            {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            }
-        );
-
-
-    const hijri =
-        getHijriDate(date);
-
-
-    const desi =
-        getDesiMonth(date);
-
-
-    if (calendarEnglish) {
-
-        calendarEnglish.textContent =
-            "📅 " + english;
-
-    }
-
-
-    if (calendarHijri) {
-
-        calendarHijri.textContent =
-            hijri
-                ? "🌙 " + hijri + " AH"
-                : "🌙 Islamic Date";
-
-    }
-
-
-    if (calendarDesi) {
-
-        calendarDesi.textContent =
-            "🌾 Desi Month: " + desi;
-
-    }
-
-
-    if (calendarToday) {
-
-        calendarToday.textContent =
-            "📻 FPC Program Schedule";
-
-    }
-
-}
-
-
-
-/* =========================================================
-   RENDER FPC CALENDAR
+   RENDER CALENDAR
 ========================================================= */
 
 function renderFPCalendar() {
@@ -1182,7 +491,6 @@ function renderFPCalendar() {
     if (!calendarDays) {
         return;
     }
-
 
     const year =
         calendarDate.getFullYear();
@@ -1220,10 +528,6 @@ function renderFPCalendar() {
         ).getDate();
 
 
-    /* -------------------------
-       EMPTY DAYS
-    ------------------------- */
-
     for (
         let i = 0;
         i < firstDay;
@@ -1236,16 +540,10 @@ function renderFPCalendar() {
         empty.className =
             "calendar-day empty";
 
-        calendarDays.appendChild(
-            empty
-        );
+        calendarDays.appendChild(empty);
 
     }
 
-
-    /* -------------------------
-       MONTH DAYS
-    ------------------------- */
 
     for (
         let day = 1;
@@ -1256,10 +554,8 @@ function renderFPCalendar() {
         const dayElement =
             document.createElement("div");
 
-
         dayElement.className =
             "calendar-day";
-
 
         dayElement.textContent =
             day;
@@ -1277,22 +573,16 @@ function renderFPCalendar() {
             new Date();
 
 
-        /* TODAY */
-
         if (
             day === today.getDate() &&
             month === today.getMonth() &&
             year === today.getFullYear()
         ) {
 
-            dayElement.classList.add(
-                "today"
-            );
+            dayElement.classList.add("today");
 
         }
 
-
-        /* SELECTED */
 
         if (
             day === selectedDate.getDate() &&
@@ -1300,27 +590,19 @@ function renderFPCalendar() {
             year === selectedDate.getFullYear()
         ) {
 
-            dayElement.classList.add(
-                "selected"
-            );
+            dayElement.classList.add("selected");
 
         }
 
-
-        /* CLICK */
 
         dayElement.addEventListener(
             "click",
             function () {
 
                 selectedDate =
-                    new Date(
-                        thisDate
-                    );
-
+                    new Date(thisDate);
 
                 renderFPCalendar();
-
 
                 showDailyPrograms(
                     selectedDate
@@ -1343,6 +625,97 @@ function renderFPCalendar() {
 
 }
 
+
+/* =========================================================
+   CALENDAR DATES
+========================================================= */
+
+function updateCalendarDates(date) {
+
+    const english =
+        date.toLocaleDateString(
+            "en-PK",
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+
+    let hijri = "";
+
+
+    try {
+
+        hijri =
+            new Intl.DateTimeFormat(
+                "en-PK-u-ca-islamic-umalqura",
+                {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                }
+            ).format(date);
+
+    } catch (error) {
+
+        try {
+
+            hijri =
+                new Intl.DateTimeFormat(
+                    "en-PK-u-ca-islamic",
+                    {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
+                    }
+                ).format(date);
+
+        } catch (error2) {
+
+            hijri = "";
+
+        }
+
+    }
+
+
+    if (calendarEnglish) {
+
+        calendarEnglish.textContent =
+            "📅 " + english;
+
+    }
+
+
+    if (calendarHijri) {
+
+        calendarHijri.textContent =
+            hijri
+                ? "🌙 " + hijri + " AH"
+                : "🌙 Islamic Date";
+
+    }
+
+
+    if (calendarDesi) {
+
+        calendarDesi.textContent =
+            "🌾 Desi Calendar";
+
+    }
+
+
+    if (calendarToday) {
+
+        calendarToday.textContent =
+            "📻 FPC Program Schedule";
+
+    }
+
+}
 
 
 /* =========================================================
@@ -1395,7 +768,6 @@ function showDailyPrograms(date) {
             const row =
                 document.createElement("div");
 
-
             row.className =
                 "program-row";
 
@@ -1403,10 +775,8 @@ function showDailyPrograms(date) {
             const time =
                 document.createElement("div");
 
-
             time.className =
                 "program-time";
-
 
             time.textContent =
                 program[0];
@@ -1415,10 +785,8 @@ function showDailyPrograms(date) {
             const name =
                 document.createElement("div");
 
-
             name.className =
                 "program-name";
-
 
             name.textContent =
                 program[1];
@@ -1427,53 +795,35 @@ function showDailyPrograms(date) {
             const note =
                 document.createElement("div");
 
-
             note.className =
                 "program-note";
-
 
             note.textContent =
                 program[2];
 
 
-            row.appendChild(
-                time
-            );
+            row.appendChild(time);
 
-
-            row.appendChild(
-                name
-            );
+            row.appendChild(name);
 
 
             if (program[2]) {
 
-                row.appendChild(
-                    note
-                );
+                row.appendChild(note);
 
             }
 
 
-            dailyProgramList.appendChild(
-                row
-            );
+            dailyProgramList.appendChild(row);
 
         }
-    );
-
-
-    updateCalendarDates(
-        date
     );
 
 }
 
 
-
 /* =========================================================
    PREVIOUS MONTH
-   AUGUST 2026 = MIN
 ========================================================= */
 
 if (prevMonth) {
@@ -1488,44 +838,18 @@ if (prevMonth) {
 
 
             const minDate =
-                new Date(
-                    2026,
-                    7,
-                    1
-                );
-
+                new Date(2026, 7, 1);
 
             const maxDate =
-                new Date(
-                    2026,
-                    8,
-                    1
-                );
+                new Date(2026, 8, 1);
 
 
-            if (
-                calendarDate <
-                minDate
-            ) {
-
-                calendarDate =
-                    new Date(
-                        minDate
-                    );
-
+            if (calendarDate < minDate) {
+                calendarDate = minDate;
             }
 
-
-            if (
-                calendarDate >
-                maxDate
-            ) {
-
-                calendarDate =
-                    new Date(
-                        maxDate
-                    );
-
+            if (calendarDate > maxDate) {
+                calendarDate = maxDate;
             }
 
 
@@ -1539,7 +863,6 @@ if (prevMonth) {
 
             renderFPCalendar();
 
-
             showDailyPrograms(
                 selectedDate
             );
@@ -1550,10 +873,8 @@ if (prevMonth) {
 }
 
 
-
 /* =========================================================
    NEXT MONTH
-   SEPTEMBER 2026 = MAX
 ========================================================= */
 
 if (nextMonth) {
@@ -1568,44 +889,18 @@ if (nextMonth) {
 
 
             const minDate =
-                new Date(
-                    2026,
-                    7,
-                    1
-                );
-
+                new Date(2026, 7, 1);
 
             const maxDate =
-                new Date(
-                    2026,
-                    8,
-                    1
-                );
+                new Date(2026, 8, 1);
 
 
-            if (
-                calendarDate <
-                minDate
-            ) {
-
-                calendarDate =
-                    new Date(
-                        minDate
-                    );
-
+            if (calendarDate < minDate) {
+                calendarDate = minDate;
             }
 
-
-            if (
-                calendarDate >
-                maxDate
-            ) {
-
-                calendarDate =
-                    new Date(
-                        maxDate
-                    );
-
+            if (calendarDate > maxDate) {
+                calendarDate = maxDate;
             }
 
 
@@ -1619,7 +914,6 @@ if (nextMonth) {
 
             renderFPCalendar();
 
-
             showDailyPrograms(
                 selectedDate
             );
@@ -1628,7 +922,6 @@ if (nextMonth) {
     );
 
 }
-
 
 
 /* =========================================================
