@@ -2,56 +2,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        AAN FM 91.60 KHANEWAL
-       LIVE CLOCK + DATES + SLIDER + LOADER
-       ===================================================== */
+       MAIN CLOCK + DATES
+    ===================================================== */
 
     function updateTime() {
 
         const now = new Date();
 
+        /* -------------------------
+           DIGITAL CLOCK
+        ------------------------- */
+
         const hours = now.getHours();
         const minutes = now.getMinutes();
         const seconds = now.getSeconds();
 
-
-        /* =========================
-           DIGITAL CLOCK
-        ========================= */
-
         let displayHour = hours % 12;
 
-        displayHour =
-            displayHour === 0 ? 12 : displayHour;
+        if (displayHour === 0) {
+            displayHour = 12;
+        }
 
-        const ampm =
-            hours >= 12 ? "PM" : "AM";
-
+        const ampm = hours >= 12 ? "PM" : "AM";
 
         const timeString =
-            String(displayHour).padStart(2, "0") +
-            ":" +
-            String(minutes).padStart(2, "0") +
-            ":" +
+            String(displayHour).padStart(2, "0") + ":" +
+            String(minutes).padStart(2, "0") + ":" +
             String(seconds).padStart(2, "0") +
-            " " +
-            ampm;
-
+            " " + ampm;
 
         const digitalClock =
             document.getElementById("digitalClock");
 
-
         if (digitalClock) {
-
-            digitalClock.textContent =
-                timeString;
-
+            digitalClock.textContent = timeString;
         }
 
 
-        /* =========================
+        /* -------------------------
            ANALOG CLOCK
-        ========================= */
+        ------------------------- */
 
         const hourHand =
             document.getElementById("hourHand");
@@ -66,11 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const secondDegree =
             seconds * 6;
 
-
         const minuteDegree =
-            minutes * 6 +
-            seconds * 0.1;
-
+            minutes * 6 + seconds * 0.1;
 
         const hourDegree =
             (hours % 12) * 30 +
@@ -78,94 +65,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (secondHand) {
-
             secondHand.style.transform =
-                "rotate(" +
-                secondDegree +
-                "deg)";
-
+                `rotate(${secondDegree}deg)`;
         }
-
 
         if (minuteHand) {
-
             minuteHand.style.transform =
-                "rotate(" +
-                minuteDegree +
-                "deg)";
-
+                `rotate(${minuteDegree}deg)`;
         }
-
 
         if (hourHand) {
-
             hourHand.style.transform =
-                "rotate(" +
-                hourDegree +
-                "deg)";
-
+                `rotate(${hourDegree}deg)`;
         }
 
 
-        /* =========================
+        /* -------------------------
            ENGLISH DATE
-        ========================= */
-
-        const englishDate =
-            now.toLocaleDateString(
-                "en-PK",
-                {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                }
-            );
-
+        ------------------------- */
 
         const englishElement =
-            document.getElementById(
-                "englishDate"
-            );
+            document.getElementById("englishDate");
 
 
         if (englishElement) {
 
-            englishElement.textContent =
-                "📅 " +
-                englishDate;
-
-        }
-
-
-        /* =========================
-           ISLAMIC / HIJRI DATE
-        ========================= */
-
-        let islamicDate = "";
-
-
-        try {
-
-            islamicDate =
-                new Intl.DateTimeFormat(
-                    "ur-PK-u-ca-islamic",
+            const englishDate =
+                now.toLocaleDateString(
+                    "en-PK",
                     {
+                        weekday: "long",
                         day: "numeric",
                         month: "long",
                         year: "numeric"
                     }
-                ).format(now);
+                );
 
-        } catch (error) {
+            englishElement.textContent =
+                "📅 " + englishDate;
+        }
 
-            /* Fallback */
+
+        /* -------------------------
+           ISLAMIC / HIJRI DATE
+        ------------------------- */
+
+        const islamicElement =
+            document.getElementById("islamicDate");
+
+
+        if (islamicElement) {
+
+            let islamicDate = "";
 
             try {
 
                 islamicDate =
                     new Intl.DateTimeFormat(
-                        "en-US-u-ca-islamic",
+                        "en-PK-u-ca-islamic-umalqura",
                         {
                             day: "numeric",
                             month: "long",
@@ -173,29 +130,32 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     ).format(now);
 
-            } catch (fallbackError) {
+            } catch (error) {
 
-                islamicDate = "";
+                try {
 
+                    islamicDate =
+                        new Intl.DateTimeFormat(
+                            "en-PK-u-ca-islamic",
+                            {
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric"
+                            }
+                        ).format(now);
+
+                } catch (secondError) {
+
+                    islamicDate = "";
+
+                }
             }
 
-        }
-
-
-        const islamicElement =
-            document.getElementById(
-                "islamicDate"
-            );
-
-
-        if (islamicElement) {
 
             if (islamicDate) {
 
                 islamicElement.textContent =
-                    "🌙 " +
-                    islamicDate +
-                    " ھ";
+                    "🌙 " + islamicDate + " AH";
 
             } else {
 
@@ -207,43 +167,114 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* =========================
+        /* -------------------------
            DESI / PUNJABI MONTH
-        ========================= */
-
-        const desiMonths = [
-
-            "Chet",
-            "Vaisakh",
-            "Jeth",
-            "Harh",
-            "Sawan",
-            "Bhadon",
-            "Assu",
-            "Katak",
-            "Maghar",
-            "Poh",
-            "Magh",
-            "Phagun"
-
-        ];
-
-
-        const monthIndex =
-            now.getMonth();
-
+        ------------------------- */
 
         const desiElement =
-            document.getElementById(
-                "desiDate"
-            );
+            document.getElementById("desiDate");
 
 
         if (desiElement) {
 
+            const month = now.getMonth();
+            const day = now.getDate();
+
+            let desiMonth = "";
+
+            /*
+             Approximate Punjabi/Bikrami seasonal
+             month display.
+
+             Vaisakh: Apr 14 – May 14
+             Jeth:    May 15 – Jun 14
+             Harh:    Jun 15 – Jul 15
+             Sawan:   Jul 16 – Aug 16
+             Bhadon:  Aug 17 – Sep 16
+             Assu:    Sep 17 – Oct 16
+             Katak:   Oct 17 – Nov 15
+             Maghar:  Nov 16 – Dec 15
+             Poh:     Dec 16 – Jan 13
+             Magh:    Jan 14 – Feb 12
+             Phagun:  Feb 13 – Mar 13
+             Chet:    Mar 14 – Apr 13
+            */
+
+            if (
+                (month === 3 && day >= 14) ||
+                (month === 4 && day <= 14)
+            ) {
+                desiMonth = "Vaisakh";
+
+            } else if (
+                (month === 4 && day >= 15) ||
+                (month === 5 && day <= 14)
+            ) {
+                desiMonth = "Jeth";
+
+            } else if (
+                (month === 5 && day >= 15) ||
+                (month === 6 && day <= 15)
+            ) {
+                desiMonth = "Harh";
+
+            } else if (
+                (month === 6 && day >= 16) ||
+                (month === 7 && day <= 16)
+            ) {
+                desiMonth = "Sawan";
+
+            } else if (
+                (month === 7 && day >= 17) ||
+                (month === 8 && day <= 16)
+            ) {
+                desiMonth = "Bhadon";
+
+            } else if (
+                (month === 8 && day >= 17) ||
+                (month === 9 && day <= 16)
+            ) {
+                desiMonth = "Assu";
+
+            } else if (
+                (month === 9 && day >= 17) ||
+                (month === 10 && day <= 15)
+            ) {
+                desiMonth = "Katak";
+
+            } else if (
+                (month === 10 && day >= 16) ||
+                (month === 11 && day <= 15)
+            ) {
+                desiMonth = "Maghar";
+
+            } else if (
+                (month === 11 && day >= 16) ||
+                (month === 0 && day <= 13)
+            ) {
+                desiMonth = "Poh";
+
+            } else if (
+                (month === 0 && day >= 14) ||
+                (month === 1 && day <= 12)
+            ) {
+                desiMonth = "Magh";
+
+            } else if (
+                (month === 1 && day >= 13) ||
+                (month === 2 && day <= 13)
+            ) {
+                desiMonth = "Phagun";
+
+            } else {
+
+                desiMonth = "Chet";
+
+            }
+
+
             desiElement.textContent =
-                "🌾 Desi Month: " +
-                desiMonths[monthIndex];
+                "🌾 Desi Month: " + desiMonth;
 
         }
 
@@ -252,28 +283,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateTime();
 
+    setInterval(updateTime, 1000);
 
-    setInterval(
-        updateTime,
-        1000
-    );
 
 
     /* =====================================================
        MAIN WEBSITE SLIDER
-       ===================================================== */
+    ===================================================== */
 
     const slides =
-        document.querySelectorAll(
-            ".slide"
-        );
-
+        document.querySelectorAll(".slide");
 
     const dots =
-        document.querySelectorAll(
-            ".dot"
-        );
-
+        document.querySelectorAll(".dot");
 
     let currentSlide = 0;
 
@@ -281,121 +303,92 @@ document.addEventListener("DOMContentLoaded", function () {
     function showSlide(index) {
 
         if (!slides.length) {
-
             return;
-
         }
 
 
-        slides.forEach(
-            function (slide) {
+        slides.forEach(function (slide) {
 
-                slide.classList.remove(
-                    "active"
-                );
+            slide.classList.remove("active");
 
-            }
-        );
+        });
 
 
-        dots.forEach(
-            function (dot) {
+        dots.forEach(function (dot) {
 
-                dot.classList.remove(
-                    "active-dot"
-                );
+            dot.classList.remove("active-dot");
 
-            }
-        );
+        });
 
 
         if (slides[index]) {
 
-            slides[index].classList.add(
-                "active"
-            );
+            slides[index].classList.add("active");
 
         }
 
 
         if (dots[index]) {
 
-            dots[index].classList.add(
-                "active-dot"
-            );
+            dots[index].classList.add("active-dot");
 
         }
 
     }
 
 
-    showSlide(
-        currentSlide
-    );
+    showSlide(currentSlide);
 
 
     if (slides.length > 1) {
 
-        setInterval(
-            function () {
+        setInterval(function () {
 
-                currentSlide++;
+            currentSlide++;
 
+            if (
+                currentSlide >=
+                slides.length
+            ) {
 
-                if (
-                    currentSlide >=
-                    slides.length
-                ) {
+                currentSlide = 0;
 
-                    currentSlide = 0;
+            }
 
-                }
+            showSlide(currentSlide);
 
-
-                showSlide(
-                    currentSlide
-                );
-
-            },
-            5000
-        );
+        }, 5000);
 
     }
 
 
-    /* =========================
+    /* =====================================================
        SLIDER DOT CLICK
-    ========================= */
+    ===================================================== */
 
-    dots.forEach(
-        function (dot, index) {
+    dots.forEach(function (dot, index) {
 
-            dot.addEventListener(
-                "click",
-                function () {
+        dot.addEventListener(
+            "click",
+            function () {
 
-                    currentSlide =
-                        index;
+                currentSlide = index;
 
-                    showSlide(
-                        currentSlide
-                    );
+                showSlide(currentSlide);
 
-                }
-            );
+            }
+        );
 
-        }
-    );
+    });
+
 
 
     /* =====================================================
        BACK TO TOP
-       ===================================================== */
+    ===================================================== */
 
     const topButton =
-        document.getElementById(
-            "topBtn"
-        );
+        document.getElementById("topBtn");
 
 
     if (topButton) {
@@ -427,12 +420,10 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             function () {
 
-                window.scrollTo(
-                    {
-                        top: 0,
-                        behavior: "smooth"
-                    }
-                );
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
 
             }
         );
@@ -440,55 +431,48 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+
     /* =====================================================
        LOADER
-       ===================================================== */
+    ===================================================== */
 
     const loader =
-        document.getElementById(
-            "loader"
-        );
+        document.getElementById("loader");
 
 
     if (loader) {
 
-        setTimeout(
-            function () {
+        setTimeout(function () {
 
-                loader.style.transition =
-                    "opacity 0.5s ease";
+            loader.style.opacity = "0";
 
-                loader.style.opacity =
-                    "0";
+            loader.style.transition =
+                "opacity 0.5s ease";
 
 
-                setTimeout(
-                    function () {
+            setTimeout(function () {
 
-                        loader.style.display =
-                            "none";
+                loader.style.display =
+                    "none";
 
-                    },
-                    500
-                );
+            }, 500);
 
-            },
-            1500
-        );
+        }, 1500);
 
     }
 
 });
 
 
-/* =====================================================
-   AAN FM FPC CALENDAR
+
+/* =========================================================
+   AAN FM 91.60 KHANEWAL
+   FPC PROGRAM SCHEDULE
    AUGUST + SEPTEMBER 2026
-   ===================================================== */
+========================================================= */
 
 
 const fpcSchedule = {
-
 
     /* =========================
        SUNDAY
@@ -579,6 +563,69 @@ const fpcSchedule = {
 
         [
             "12:00 PM – 02:00 PM",
+            "RJ Maher Akmal Sial",
+            ""
+        ],
+
+        [
+            "02:00 PM – 04:00 PM",
+            "B-2-B",
+            ""
+        ],
+
+        [
+            "04:00 PM – 06:00 PM",
+            "RJ Wasim Sajjad",
+            ""
+        ],
+
+        [
+            "06:00 PM – 08:00 PM",
+            "RJ Maher Hafeez",
+            "Mehfil Sajna Di"
+        ],
+
+        [
+            "08:00 PM – 10:00 PM",
+            "RJ Shafqat Bukhari",
+            ""
+        ],
+
+        [
+            "10:00 PM – 12:00 AM",
+            "Love Beats With RJ Nazi Naz",
+            ""
+        ]
+
+    ],
+
+
+    /* =========================
+       TUESDAY
+    ========================= */
+
+    2: [
+
+        [
+            "06:00 AM – 09:00 AM",
+            "Shafqat Bukhari",
+            "Good Morning Pakistan"
+        ],
+
+        [
+            "09:00 AM – 10:00 AM",
+            "B-2-B",
+            ""
+        ],
+
+        [
+            "10:00 AM – 12:00 PM",
+            "B-2-B",
+            ""
+        ],
+
+        [
+            "12:00 PM – 02:00 PM",
             "RJ Munawar Shehzad",
             ""
         ],
@@ -617,10 +664,10 @@ const fpcSchedule = {
 
 
     /* =========================
-       TUESDAY
+       WEDNESDAY
     ========================= */
 
-    2: [
+    3: [
 
         [
             "06:00 AM – 09:00 AM",
@@ -680,10 +727,10 @@ const fpcSchedule = {
 
 
     /* =========================
-       WEDNESDAY
+       THURSDAY
     ========================= */
 
-    3: [
+    4: [
 
         [
             "06:00 AM – 09:00 AM",
@@ -743,10 +790,10 @@ const fpcSchedule = {
 
 
     /* =========================
-       THURSDAY
+       FRIDAY
     ========================= */
 
-    4: [
+    5: [
 
         [
             "06:00 AM – 09:00 AM",
@@ -806,10 +853,10 @@ const fpcSchedule = {
 
 
     /* =========================
-       FRIDAY
+       SATURDAY
     ========================= */
 
-    5: [
+    6: [
 
         [
             "06:00 AM – 09:00 AM",
@@ -865,189 +912,293 @@ const fpcSchedule = {
             "Haar Hamelan"
         ]
 
-    ],
-
-
-    /* =========================
-       SATURDAY
-    ========================= */
-
-    6: [
-
-        [
-            "06:00 AM – 09:00 AM",
-            "RJ Parviaz Ahmad",
-            "Good Morning Pakistan"
-        ],
-
-        [
-            "09:00 AM – 10:00 AM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "10:00 AM – 12:00 PM",
-            "RJ Ghulam Nabi",
-            ""
-        ],
-
-        [
-            "12:00 PM – 02:00 PM",
-            "B-2-B",
-            ""
-        ],
-
-        [
-            "02:00 PM – 04:00 PM",
-            "RJ Maher Akmal Sial",
-            ""
-        ],
-
-        [
-            "04:00 PM – 06:00 PM",
-            "RJ Hussain Raaz",
-            ""
-        ],
-
-        [
-            "06:00 PM – 08:00 PM",
-            "RJ Maher Hafeez",
-            "Mehfil Sajna Di"
-        ],
-
-        [
-            "08:00 PM – 10:00 PM",
-            "RJ Munawar Shehzad",
-            ""
-        ],
-
-        [
-            "10:00 PM – 12:00 AM",
-            "RJ Tahir Warsi",
-            "Shabe-Ghazal"
-        ]
-
     ]
 
 };
 
 
-/* =====================================================
-   CALENDAR VARIABLES
-   ===================================================== */
 
+/* =========================================================
+   CALENDAR VARIABLES
+========================================================= */
 
 let calendarDate =
-    new Date(
-        2026,
-        7,
-        1
-    );
-
+    new Date(2026, 7, 1);
 
 let selectedDate =
-    new Date(
-        2026,
-        7,
-        1
-    );
+    new Date(2026, 7, 1);
 
 
 const calendarDays =
-    document.getElementById(
-        "calendarDays"
-    );
-
+    document.getElementById("calendarDays");
 
 const calendarMonth =
-    document.getElementById(
-        "calendarMonth"
-    );
-
+    document.getElementById("calendarMonth");
 
 const calendarToday =
-    document.getElementById(
-        "calendarToday"
-    );
-
+    document.getElementById("calendarToday");
 
 const calendarEnglish =
-    document.getElementById(
-        "calendarEnglish"
-    );
-
+    document.getElementById("calendarEnglish");
 
 const calendarHijri =
-    document.getElementById(
-        "calendarHijri"
-    );
-
+    document.getElementById("calendarHijri");
 
 const calendarDesi =
-    document.getElementById(
-        "calendarDesi"
-    );
-
+    document.getElementById("calendarDesi");
 
 const dailyProgramList =
-    document.getElementById(
-        "dailyProgramList"
-    );
-
+    document.getElementById("dailyProgramList");
 
 const selectedDayTitle =
-    document.getElementById(
-        "selectedDayTitle"
-    );
-
+    document.getElementById("selectedDayTitle");
 
 const prevMonth =
-    document.getElementById(
-        "prevMonth"
-    );
-
+    document.getElementById("prevMonth");
 
 const nextMonth =
-    document.getElementById(
-        "nextMonth"
-    );
+    document.getElementById("nextMonth");
 
 
-/* =====================================================
-   RENDER CALENDAR
-   ===================================================== */
 
+/* =========================================================
+   HIJRI DATE FUNCTION
+========================================================= */
+
+function getHijriDate(date) {
+
+    try {
+
+        return new Intl.DateTimeFormat(
+            "en-PK-u-ca-islamic-umalqura",
+            {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        ).format(date);
+
+    } catch (error) {
+
+        try {
+
+            return new Intl.DateTimeFormat(
+                "en-PK-u-ca-islamic",
+                {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                }
+            ).format(date);
+
+        } catch (secondError) {
+
+            return "";
+
+        }
+
+    }
+
+}
+
+
+
+/* =========================================================
+   CALENDAR DESI MONTH
+========================================================= */
+
+function getDesiMonth(date) {
+
+    const month =
+        date.getMonth();
+
+    const day =
+        date.getDate();
+
+
+    if (
+        (month === 3 && day >= 14) ||
+        (month === 4 && day <= 14)
+    ) {
+        return "Vaisakh";
+    }
+
+
+    if (
+        (month === 4 && day >= 15) ||
+        (month === 5 && day <= 14)
+    ) {
+        return "Jeth";
+    }
+
+
+    if (
+        (month === 5 && day >= 15) ||
+        (month === 6 && day <= 15)
+    ) {
+        return "Harh";
+    }
+
+
+    if (
+        (month === 6 && day >= 16) ||
+        (month === 7 && day <= 16)
+    ) {
+        return "Sawan";
+    }
+
+
+    if (
+        (month === 7 && day >= 17) ||
+        (month === 8 && day <= 16)
+    ) {
+        return "Bhadon";
+    }
+
+
+    if (
+        (month === 8 && day >= 17) ||
+        (month === 9 && day <= 16)
+    ) {
+        return "Assu";
+    }
+
+
+    if (
+        (month === 9 && day >= 17) ||
+        (month === 10 && day <= 15)
+    ) {
+        return "Katak";
+    }
+
+
+    if (
+        (month === 10 && day >= 16) ||
+        (month === 11 && day <= 15)
+    ) {
+        return "Maghar";
+    }
+
+
+    if (
+        (month === 11 && day >= 16) ||
+        (month === 0 && day <= 13)
+    ) {
+        return "Poh";
+    }
+
+
+    if (
+        (month === 0 && day >= 14) ||
+        (month === 1 && day <= 12)
+    ) {
+        return "Magh";
+    }
+
+
+    if (
+        (month === 1 && day >= 13) ||
+        (month === 2 && day <= 13)
+    ) {
+        return "Phagun";
+    }
+
+
+    return "Chet";
+
+}
+
+
+
+/* =========================================================
+   UPDATE CALENDAR DATES
+========================================================= */
+
+function updateCalendarDates(date) {
+
+    const english =
+        date.toLocaleDateString(
+            "en-PK",
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+
+    const hijri =
+        getHijriDate(date);
+
+
+    const desi =
+        getDesiMonth(date);
+
+
+    if (calendarEnglish) {
+
+        calendarEnglish.textContent =
+            "📅 " + english;
+
+    }
+
+
+    if (calendarHijri) {
+
+        calendarHijri.textContent =
+            hijri
+                ? "🌙 " + hijri + " AH"
+                : "🌙 Islamic Date";
+
+    }
+
+
+    if (calendarDesi) {
+
+        calendarDesi.textContent =
+            "🌾 Desi Month: " + desi;
+
+    }
+
+
+    if (calendarToday) {
+
+        calendarToday.textContent =
+            "📻 FPC Program Schedule";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   RENDER FPC CALENDAR
+========================================================= */
 
 function renderFPCalendar() {
 
     if (!calendarDays) {
-
         return;
-
     }
 
 
     const year =
         calendarDate.getFullYear();
 
-
     const month =
         calendarDate.getMonth();
 
 
-    if (calendarMonth) {
-
-        calendarMonth.textContent =
-            calendarDate.toLocaleDateString(
-                "en-PK",
-                {
-                    month: "long",
-                    year: "numeric"
-                }
-            );
-
-    }
+    calendarMonth.textContent =
+        calendarDate.toLocaleDateString(
+            "en-PK",
+            {
+                month: "long",
+                year: "numeric"
+            }
+        );
 
 
     calendarDays.innerHTML = "";
@@ -1069,7 +1220,9 @@ function renderFPCalendar() {
         ).getDate();
 
 
-    /* Empty days */
+    /* -------------------------
+       EMPTY DAYS
+    ------------------------- */
 
     for (
         let i = 0;
@@ -1078,14 +1231,10 @@ function renderFPCalendar() {
     ) {
 
         const empty =
-            document.createElement(
-                "div"
-            );
-
+            document.createElement("div");
 
         empty.className =
             "calendar-day empty";
-
 
         calendarDays.appendChild(
             empty
@@ -1094,7 +1243,9 @@ function renderFPCalendar() {
     }
 
 
-    /* Calendar dates */
+    /* -------------------------
+       MONTH DAYS
+    ------------------------- */
 
     for (
         let day = 1;
@@ -1103,9 +1254,7 @@ function renderFPCalendar() {
     ) {
 
         const dayElement =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
 
 
         dayElement.className =
@@ -1128,16 +1277,12 @@ function renderFPCalendar() {
             new Date();
 
 
-        /* Today */
+        /* TODAY */
 
         if (
-
             day === today.getDate() &&
-
             month === today.getMonth() &&
-
             year === today.getFullYear()
-
         ) {
 
             dayElement.classList.add(
@@ -1147,16 +1292,12 @@ function renderFPCalendar() {
         }
 
 
-        /* Selected */
+        /* SELECTED */
 
         if (
-
             day === selectedDate.getDate() &&
-
             month === selectedDate.getMonth() &&
-
             year === selectedDate.getFullYear()
-
         ) {
 
             dayElement.classList.add(
@@ -1166,12 +1307,16 @@ function renderFPCalendar() {
         }
 
 
+        /* CLICK */
+
         dayElement.addEventListener(
             "click",
             function () {
 
                 selectedDate =
-                    thisDate;
+                    new Date(
+                        thisDate
+                    );
 
 
                 renderFPCalendar();
@@ -1199,115 +1344,15 @@ function renderFPCalendar() {
 }
 
 
-/* =====================================================
-   CALENDAR ENGLISH + ISLAMIC DATE
-   ===================================================== */
 
-
-function updateCalendarDates(
-    date
-) {
-
-    const english =
-        date.toLocaleDateString(
-            "en-PK",
-            {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            }
-        );
-
-
-    let hijri = "";
-
-
-    try {
-
-        hijri =
-            new Intl.DateTimeFormat(
-                "ur-PK-u-ca-islamic",
-                {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                }
-            ).format(date);
-
-    } catch (error) {
-
-        try {
-
-            hijri =
-                new Intl.DateTimeFormat(
-                    "en-US-u-ca-islamic",
-                    {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric"
-                    }
-                ).format(date);
-
-        } catch (fallbackError) {
-
-            hijri = "";
-
-        }
-
-    }
-
-
-    if (calendarEnglish) {
-
-        calendarEnglish.textContent =
-            "📅 " +
-            english;
-
-    }
-
-
-    if (calendarHijri) {
-
-        calendarHijri.textContent =
-            hijri
-                ? "🌙 " + hijri + " ھ"
-                : "🌙 Islamic Date";
-
-    }
-
-
-    if (calendarDesi) {
-
-        calendarDesi.textContent =
-            "🌾 Desi Calendar";
-
-    }
-
-
-    if (calendarToday) {
-
-        calendarToday.textContent =
-            "📻 FPC Program Schedule";
-
-    }
-
-}
-
-
-/* =====================================================
+/* =========================================================
    DAILY PROGRAMS
-   ===================================================== */
+========================================================= */
 
-
-function showDailyPrograms(
-    date
-) {
+function showDailyPrograms(date) {
 
     if (!dailyProgramList) {
-
         return;
-
     }
 
 
@@ -1337,22 +1382,18 @@ function showDailyPrograms(
     }
 
 
-    dailyProgramList.innerHTML =
-        "";
+    dailyProgramList.innerHTML = "";
 
 
     const programs =
-        fpcSchedule[day] ||
-        [];
+        fpcSchedule[day] || [];
 
 
     programs.forEach(
         function (program) {
 
             const row =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
 
             row.className =
@@ -1360,9 +1401,7 @@ function showDailyPrograms(
 
 
             const time =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
 
             time.className =
@@ -1374,9 +1413,7 @@ function showDailyPrograms(
 
 
             const name =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
 
             name.className =
@@ -1388,9 +1425,7 @@ function showDailyPrograms(
 
 
             const note =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
 
             note.className =
@@ -1427,13 +1462,19 @@ function showDailyPrograms(
         }
     );
 
+
+    updateCalendarDates(
+        date
+    );
+
 }
 
 
-/* =====================================================
-   PREVIOUS MONTH
-   ===================================================== */
 
+/* =========================================================
+   PREVIOUS MONTH
+   AUGUST 2026 = MIN
+========================================================= */
 
 if (prevMonth) {
 
@@ -1442,8 +1483,7 @@ if (prevMonth) {
         function () {
 
             calendarDate.setMonth(
-                calendarDate.getMonth() -
-                1
+                calendarDate.getMonth() - 1
             );
 
 
@@ -1469,7 +1509,9 @@ if (prevMonth) {
             ) {
 
                 calendarDate =
-                    minDate;
+                    new Date(
+                        minDate
+                    );
 
             }
 
@@ -1480,7 +1522,9 @@ if (prevMonth) {
             ) {
 
                 calendarDate =
-                    maxDate;
+                    new Date(
+                        maxDate
+                    );
 
             }
 
@@ -1506,10 +1550,11 @@ if (prevMonth) {
 }
 
 
-/* =====================================================
-   NEXT MONTH
-   ===================================================== */
 
+/* =========================================================
+   NEXT MONTH
+   SEPTEMBER 2026 = MAX
+========================================================= */
 
 if (nextMonth) {
 
@@ -1518,8 +1563,7 @@ if (nextMonth) {
         function () {
 
             calendarDate.setMonth(
-                calendarDate.getMonth() +
-                1
+                calendarDate.getMonth() + 1
             );
 
 
@@ -1545,7 +1589,9 @@ if (nextMonth) {
             ) {
 
                 calendarDate =
-                    minDate;
+                    new Date(
+                        minDate
+                    );
 
             }
 
@@ -1556,7 +1602,9 @@ if (nextMonth) {
             ) {
 
                 calendarDate =
-                    maxDate;
+                    new Date(
+                        maxDate
+                    );
 
             }
 
@@ -1582,13 +1630,12 @@ if (nextMonth) {
 }
 
 
-/* =====================================================
-   START CALENDAR
-   ===================================================== */
 
+/* =========================================================
+   START CALENDAR
+========================================================= */
 
 renderFPCalendar();
-
 
 showDailyPrograms(
     selectedDate
