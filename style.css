@@ -868,3 +868,43 @@ footer {
         margin: 5px 0 0;
     }
 }
+/* =========================
+   LIVE AUDIO PLAYER FIX
+========================= */
+
+#aanLivePlayer {
+    display: block !important;
+    width: 100% !important;
+    max-width: 420px !important;
+    height: 54px !important;
+    min-height: 54px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+.radio-player {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    flex-wrap: wrap !important;
+}
+
+#aanLivePlayer::-webkit-media-controls-panel {
+    display: flex !important;
+}
+
+@media (max-width: 600px) {
+
+    #aanLivePlayer {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .radio-player {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+}
