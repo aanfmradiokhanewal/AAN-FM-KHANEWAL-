@@ -1857,3 +1857,638 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
+/* =====================================================
+   🇵🇰 AAN FM 91.60 KHANEWAL
+   INDEPENDENCE DAY CAMPAIGN
+   SMART DAILY REMAINING SLIDES
+   02 AUGUST → 14 AUGUST 2026
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const campaign =
+        document.getElementById("independenceCampaign");
+
+    const slider =
+        document.getElementById("independenceSlider");
+
+    const dotsContainer =
+        document.getElementById("independenceDots");
+
+    if (!campaign || !slider || !dotsContainer) {
+        return;
+    }
+
+
+    /* =================================================
+       CAMPAIGN SETTINGS
+    ================================================= */
+
+    const campaignStart =
+        new Date(2026, 7, 2, 0, 0, 0);
+
+    const independenceDay =
+        new Date(2026, 7, 14, 0, 0, 0);
+
+    const campaignEnd =
+        new Date(2026, 7, 15, 0, 0, 0);
+
+
+    /* =================================================
+       ALL CAMPAIGN SLIDES
+    ================================================= */
+
+    const campaignSlides = [
+
+        {
+            day: 2,
+            title: "جشنِ آزادی 2026",
+            text: "آزادی کا جشن، محبتِ وطن کے ساتھ۔"
+        },
+
+        {
+            day: 3,
+            title: "قائداعظم محمد علی جناح",
+            text: "اتحاد، ایمان اور نظم و ضبط — مضبوط پاکستان کی بنیاد۔"
+        },
+
+        {
+            day: 4,
+            title: "علامہ محمد اقبال",
+            text: "خودی، علم، کردار اور بلند مقصد کا پیغام۔"
+        },
+
+        {
+            day: 5,
+            title: "آزادی قربانیوں کا ثمر ہے",
+            text: "پاکستان کے قیام کے لیے دی جانے والی قربانیوں کو سلام۔"
+        },
+
+        {
+            day: 6,
+            title: "پاکستان — ہماری پہچان",
+            text: "سبز ہلالی پرچم ہماری امید، اتحاد اور شناخت کی علامت ہے۔"
+        },
+
+        {
+            day: 7,
+            title: "نوجوان اور پاکستان",
+            text: "آج کے نوجوان کا علم اور کردار، کل کے پاکستان کی طاقت ہے۔"
+        },
+
+        {
+            day: 8,
+            title: "اتحاد ہماری طاقت ہے",
+            text: "ایک قوم، ایک وطن، ایک پاکستان۔"
+        },
+
+        {
+            day: 9,
+            title: "پاکستان کے معماروں کو سلام",
+            text: "تحریکِ پاکستان کے رہنماؤں اور کارکنوں کو خراجِ تحسین۔"
+        },
+
+        {
+            day: 10,
+            title: "آزادی کا سفر",
+            text: "منزل آزادی تھی، سفر جدوجہد اور قربانیوں کا تھا۔"
+        },
+
+        {
+            day: 11,
+            title: "قائداعظم کا پیغام",
+            text: "مساوی حقوق، قانون کی حکمرانی اور ذمہ دار شہری — مضبوط پاکستان کی بنیاد۔"
+        },
+
+        {
+            day: 12,
+            title: "پاکستان سے محبت",
+            text: "وطن سے محبت صرف الفاظ نہیں، اپنی ذمہ داری پوری کرنا بھی ہے۔"
+        },
+
+        {
+            day: 13,
+            title: "جشنِ آزادی کی آمد",
+            text: "کل ہے پاکستان کا دن! اپنے دلوں کو سبز و سفید رنگ دیں۔"
+        },
+
+        {
+            day: 14,
+            title: "جشنِ آزادی مبارک",
+            text: "پاکستان کی آزادی کے 79 سال مکمل ہونے پر پوری قوم کو دل کی گہرائیوں سے مبارکباد۔"
+        }
+
+    ];
+
+
+    /* =================================================
+       GET TODAY
+    ================================================= */
+
+    function getToday() {
+
+        const now = new Date();
+
+        return new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate(),
+            0,
+            0,
+            0
+        );
+
+    }
+
+
+    /* =================================================
+       CHECK CAMPAIGN
+    ================================================= */
+
+    function checkCampaign() {
+
+        const today = getToday();
+
+        if (
+            today < campaignStart ||
+            today >= campaignEnd
+        ) {
+
+            campaign.style.display = "none";
+
+            return false;
+
+        }
+
+        campaign.style.display = "flex";
+
+        return true;
+
+    }
+
+
+    /* =================================================
+       REMAINING DAYS
+    ================================================= */
+
+    function getRemainingDays() {
+
+        const today = getToday();
+
+        const difference =
+            independenceDay.getTime() -
+            today.getTime();
+
+        return Math.ceil(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+    }
+
+
+    /* =================================================
+       CLEAR OLD SLIDES
+    ================================================= */
+
+    slider.innerHTML = "";
+    dotsContainer.innerHTML = "";
+
+
+    /* =================================================
+       CREATE ONLY REMAINING SLIDES
+    ================================================= */
+
+    function buildCampaign() {
+
+        if (!checkCampaign()) {
+            return;
+        }
+
+
+        slider.innerHTML = "";
+        dotsContainer.innerHTML = "";
+
+
+        const today =
+            getToday();
+
+
+        const todayDay =
+            today.getDate();
+
+
+        /* ---------------------------------------------
+           FILTER:
+           TODAY → 14 AUGUST
+        --------------------------------------------- */
+
+        const remainingSlides =
+            campaignSlides.filter(function (item) {
+
+                return item.day >= todayDay;
+
+            });
+
+
+        let currentSlide = 0;
+
+
+        /* =================================================
+           CREATE SLIDES
+        ================================================= */
+
+        remainingSlides.forEach(function (item, index) {
+
+            const slide =
+                document.createElement("div");
+
+            slide.className =
+                "independence-slide";
+
+
+            if (index === 0) {
+
+                slide.classList.add("active");
+
+            }
+
+
+            /* ---------- ANIMATED FLAGS ---------- */
+
+            const flags =
+                document.createElement("div");
+
+            flags.className =
+                "animated-flags";
+
+
+            for (let i = 0; i < 5; i++) {
+
+                const flag =
+                    document.createElement("span");
+
+                flag.textContent =
+                    "🇵🇰";
+
+                flag.style.animationDelay =
+                    (i * 0.25) + "s";
+
+                flags.appendChild(flag);
+
+            }
+
+
+            /* ---------- DATE ---------- */
+
+            const date =
+                document.createElement("div");
+
+            date.className =
+                "campaign-date";
+
+            date.textContent =
+                "📅 " +
+                item.day +
+                " AUGUST 2026";
+
+
+            /* ---------- MAIN FLAG ---------- */
+
+            const mainFlag =
+                document.createElement("div");
+
+            mainFlag.className =
+                "campaign-flag";
+
+            mainFlag.textContent =
+                "🇵🇰";
+
+
+            /* ---------- SPECIAL TRANSMISSION ---------- */
+
+            const transmission =
+                document.createElement("h2");
+
+            transmission.textContent =
+                "SPECIAL INDEPENDENCE DAY TRANSMISSION";
+
+
+            /* ---------- RADIO NAME ---------- */
+
+            const radioName =
+                document.createElement("h1");
+
+            radioName.textContent =
+                "AAN FM 91.60 KHANEWAL";
+
+
+            /* ---------- TITLE ---------- */
+
+            const title =
+                document.createElement("h3");
+
+            title.textContent =
+                item.title;
+
+
+            /* ---------- TEXT ---------- */
+
+            const text =
+                document.createElement("p");
+
+            text.textContent =
+                item.text;
+
+
+            /* ---------- COUNTDOWN ---------- */
+
+            const countdown =
+                document.createElement("strong");
+
+            countdown.className =
+                "independence-countdown";
+
+
+            const remaining =
+                getRemainingDays();
+
+
+            if (remaining > 0) {
+
+                countdown.textContent =
+                    "⏳ " +
+                    remaining +
+                    " DAYS REMAINING UNTIL INDEPENDENCE DAY";
+
+            } else {
+
+                countdown.textContent =
+                    "🇵🇰 TODAY IS INDEPENDENCE DAY! 🇵🇰";
+
+            }
+
+
+            /* ---------- FOOTER ---------- */
+
+            const footer =
+                document.createElement("strong");
+
+            footer.textContent =
+                "Har Dil Ki Awaaz • Happy Independence Day 🇵🇰";
+
+
+            /* ---------- ADD ELEMENTS ---------- */
+
+            slide.appendChild(flags);
+
+            slide.appendChild(date);
+
+            slide.appendChild(mainFlag);
+
+            slide.appendChild(transmission);
+
+            slide.appendChild(radioName);
+
+            slide.appendChild(title);
+
+            slide.appendChild(text);
+
+            slide.appendChild(countdown);
+
+            slide.appendChild(footer);
+
+
+            slider.appendChild(slide);
+
+
+            /* =================================================
+               DOT
+            ================================================= */
+
+            const dot =
+                document.createElement("button");
+
+            dot.className =
+                "independence-dot";
+
+
+            if (index === 0) {
+
+                dot.classList.add("active");
+
+            }
+
+
+            dot.setAttribute(
+                "aria-label",
+                item.day +
+                " August 2026"
+            );
+
+
+            dot.addEventListener(
+                "click",
+                function () {
+
+                    currentSlide =
+                        index;
+
+                    showSlide(
+                        currentSlide
+                    );
+
+                }
+            );
+
+
+            dotsContainer.appendChild(dot);
+
+        });
+
+
+        /* =================================================
+           GET CREATED ELEMENTS
+        ================================================= */
+
+        const slides =
+            slider.querySelectorAll(
+                ".independence-slide"
+            );
+
+        const dots =
+            dotsContainer.querySelectorAll(
+                ".independence-dot"
+            );
+
+
+        /* =================================================
+           SHOW SLIDE
+        ================================================= */
+
+        function showSlide(index) {
+
+            slides.forEach(function (slide) {
+
+                slide.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            dots.forEach(function (dot) {
+
+                dot.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            if (slides[index]) {
+
+                slides[index].classList.add(
+                    "active"
+                );
+
+            }
+
+
+            if (dots[index]) {
+
+                dots[index].classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+
+
+        /* =================================================
+           START SLIDER
+        ================================================= */
+
+        if (slides.length > 0) {
+
+            showSlide(0);
+
+        }
+
+
+        /* =================================================
+           AUTO SLIDE
+           6 SECONDS
+        ================================================= */
+
+        if (slides.length > 1) {
+
+            setInterval(function () {
+
+                currentSlide++;
+
+                if (
+                    currentSlide >=
+                    slides.length
+                ) {
+
+                    currentSlide = 0;
+
+                }
+
+                showSlide(
+                    currentSlide
+                );
+
+            }, 6000);
+
+        }
+
+    }
+
+
+    /* =================================================
+       FIRST LOAD
+    ================================================= */
+
+    buildCampaign();
+
+
+    /* =================================================
+       CHECK DATE EVERY MINUTE
+       اگر رات 12 بجے تاریخ تبدیل ہو
+       تو نئی slides خود بنیں گی
+    ================================================= */
+
+    let lastDate =
+        getToday().getTime();
+
+
+    setInterval(function () {
+
+        const today =
+            getToday().getTime();
+
+
+        if (
+            today !== lastDate
+        ) {
+
+            lastDate =
+                today;
+
+            buildCampaign();
+
+        }
+
+    }, 30000);
+
+
+    /* =================================================
+       COUNTDOWN UPDATE
+       EVERY MINUTE
+    ================================================= */
+
+    setInterval(function () {
+
+        if (
+            !checkCampaign()
+        ) {
+
+            return;
+
+        }
+
+
+        const countdowns =
+            document.querySelectorAll(
+                ".independence-countdown"
+            );
+
+
+        const remaining =
+            getRemainingDays();
+
+
+        countdowns.forEach(function (element) {
+
+            if (remaining > 0) {
+
+                element.textContent =
+                    "⏳ " +
+                    remaining +
+                    " DAYS REMAINING UNTIL INDEPENDENCE DAY";
+
+            } else {
+
+                element.textContent =
+                    "🇵🇰 TODAY IS INDEPENDENCE DAY! 🇵🇰";
+
+            }
+
+        });
+
+    }, 60000);
+
+});
