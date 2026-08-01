@@ -1,65 +1,146 @@
-const slides=document.querySelectorAll(".slide");
+document.addEventListener("DOMContentLoaded", function () {
 
-let current=0;
+    /* =========================
+       LIVE CLOCK + DATE
+    ========================= */
 
-function showSlide(){
+    const clock = document.getElementById("liveClock");
 
-slides.forEach(s=>s.classList.remove("active"));
+    function updateClock() {
+        if (!clock) return;
 
-current++;
+        const now = new Date();
 
-if(current>=slides.length){
-current=0;
-}
+        const time = now.toLocaleTimeString("en-PK", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true
+        });
 
-slides[current].classList.add("active");
+        const date = now.toLocaleDateString("en-PK", {
+            weekday: "long",
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+        });
 
-}
+        clock.innerHTML = `
+            <div>${time}</div>
+            <div>${date}</div>
+        `;
+    }
 
-setInterval(showSlide,4000);
-window.onload=function(){
+    updateClock();
+    setInterval(updateClock, 1000);
 
-document.getElementById("loader").style.display="none";
 
-}
+    /* =========================
+       HERO SLIDER
+    ========================= */
 
-document.getElementById("topBtn").onclick=function(){
+    const slides = document.querySelectorAll(".slide");
+    let currentSlide = 0;
 
-window.scrollTo({
+    function showSlide(index) {
+        if (!slides.length) return;
 
-top:0,
+        slides.forEach(function (slide) {
+            slide.classList.remove("active");
+        });
 
-behavior:"smooth"
+        slides[index].classList.add("active");
+    }
+
+    if (slides.length > 1) {
+        showSlide(currentSlide);
+
+        setInterval(function () {
+            currentSlide++;
+
+            if (currentSlide >= slides.length) {
+                currentSlide = 0;
+            }
+
+            showSlide(currentSlide);
+        }, 5000);
+    }
+
+
+    /* =========================
+       RADIO PLAYER
+    ========================= */
+
+    const radioPlayer = document.getElementById("radioPlayer");
+
+    window.playRadio = function () {
+
+        if (!radioPlayer) return;
+
+        radioPlayer.play()
+            .then(function () {
+                console.log("AAN FM Radio started.");
+            })
+            .catch(function (error) {
+                console.log("Browser blocked autoplay/play:", error);
+            });
+    };
+
+
+    /* =========================
+       BACK TO TOP BUTTON
+    ========================= */
+
+    const topBtn = document.getElementById("topBtn");
+
+    if (topBtn) {
+
+        window.addEventListener("scroll", function () {
+
+            if (window.scrollY > 400) {
+                topBtn.style.display = "block";
+            } else {
+                topBtn.style.display = "none";
+            }
+
+        });
+
+        topBtn.addEventListener("click", function () {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+    }
+
+
+    /* =========================
+       SMOOTH NAVIGATION
+    ========================= */
+
+    document.querySelectorAll('nav a[href^="#"]').forEach(function (link) {
+
+        link.addEventListener("click", function (event) {
+
+            const targetId = this.getAttribute("href");
+
+            if (targetId === "#") return;
+
+            const target = document.querySelector(targetId);
+
+            if (target) {
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+
+        });
+
+    });
 
 });
-
-}
-function updateClock(){
-
-const now = new Date();
-
-const options = {
-weekday:'long',
-year:'numeric',
-month:'long',
-day:'numeric',
-hour:'2-digit',
-minute:'2-digit',
-second:'2-digit'
-};
-
-document.getElementById("liveClock").innerHTML =
-"🇵🇰 Pakistan Time : " + now.toLocaleString('en-PK', options);
-
-}
-
-setInterval(updateClock,1000);
-
-updateClock();
-function playRadio(){
-
-const player = document.getElementById("radioPlayer");
-
-player.play();
-
-}
