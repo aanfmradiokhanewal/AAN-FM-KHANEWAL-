@@ -677,3 +677,194 @@ footer {
         bottom: 80px;
     }
 }
+/* =========================
+   FPC LIVE CALENDAR
+========================= */
+
+.live-calendar {
+    max-width: 1000px;
+    margin: 0 auto 50px;
+    padding: 30px 20px;
+    background: linear-gradient(145deg, #151515, #080808);
+    border: 1px solid #333;
+    border-radius: 22px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.45);
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.calendar-header h2 {
+    color: #ff2020;
+    font-size: 30px;
+}
+
+.calendar-header p {
+    color: #aaa;
+}
+
+.calendar-header button {
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    background: #e00000;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.calendar-header button:hover {
+    background: white;
+    color: #d00000;
+}
+
+.calendar-weekdays,
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 7px;
+}
+
+.calendar-weekdays span {
+    padding: 9px 2px;
+    color: #ff3030;
+    text-align: center;
+    font-weight: bold;
+}
+
+.calendar-day {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1b1b1b;
+    border: 1px solid #292929;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.calendar-day:hover {
+    background: #333;
+    border-color: #ff2020;
+}
+
+.calendar-day.today {
+    background: #e00000;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 18px rgba(255,0,0,.55);
+}
+
+.calendar-day.selected {
+    outline: 3px solid #ffd34d;
+    outline-offset: 1px;
+}
+
+.calendar-day.empty {
+    background: transparent;
+    border: 0;
+    cursor: default;
+}
+
+.calendar-info {
+    margin-top: 25px;
+    padding: 18px;
+    text-align: center;
+    border-top: 1px solid #333;
+    line-height: 1.9;
+}
+
+#calendarEnglish {
+    color: white;
+}
+
+#calendarHijri {
+    color: #54d7ff;
+}
+
+#calendarDesi {
+    color: #ffd34d;
+}
+
+.daily-programs {
+    margin-top: 25px;
+}
+
+.daily-programs h3 {
+    text-align: center;
+    color: #ff2020;
+    margin-bottom: 18px;
+    font-size: 24px;
+}
+
+.program-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px;
+    margin: 8px 0;
+    background: #181818;
+    border-left: 4px solid #e00000;
+    border-radius: 10px;
+}
+
+.program-time {
+    min-width: 150px;
+    color: #ffd34d;
+    font-weight: bold;
+}
+
+.program-name {
+    color: white;
+    font-weight: bold;
+}
+
+.program-note {
+    color: #aaa;
+    font-size: 13px;
+    margin-left: auto;
+}
+
+@media (max-width: 600px) {
+
+    .live-calendar {
+        margin-left: 10px;
+        margin-right: 10px;
+        padding: 20px 10px;
+    }
+
+    .calendar-header h2 {
+        font-size: 22px;
+    }
+
+    .calendar-weekdays,
+    .calendar-days {
+        gap: 4px;
+    }
+
+    .calendar-day {
+        min-height: 40px;
+        font-size: 13px;
+    }
+
+    .program-row {
+        display: block;
+    }
+
+    .program-time {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .program-note {
+        display: block;
+        margin: 5px 0 0;
+    }
+}
