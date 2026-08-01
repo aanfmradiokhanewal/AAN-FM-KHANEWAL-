@@ -908,3 +908,320 @@ footer {
     }
 
 }
+
+/* =====================================================
+   🇵🇰 AAN FM 91.60 KHANEWAL
+   INDEPENDENCE DAY CAMPAIGN
+   02 AUGUST → 14 AUGUST 2026
+===================================================== */
+
+.independence-campaign {
+    position: relative;
+    width: 100%;
+    min-height: 420px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 20%, rgba(255,255,255,0.15), transparent 35%),
+        linear-gradient(135deg, #006b3c, #003b27 55%, #001f16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.independence-slider {
+    width: 100%;
+    min-height: 420px;
+    position: relative;
+}
+
+.independence-slide {
+    position: absolute;
+    inset: 0;
+    padding: 45px 20px 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.96);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        visibility 0.8s ease;
+}
+
+.independence-slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+
+/* ---------- ANIMATED FLAGS ---------- */
+
+.animated-flags {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    pointer-events: none;
+    font-size: 45px;
+    opacity: 0.9;
+}
+
+.animated-flags span {
+    display: inline-block;
+    animation:
+        flagWave 2s ease-in-out infinite,
+        flagFloat 4s ease-in-out infinite;
+}
+
+@keyframes flagWave {
+
+    0%, 100% {
+        transform: rotate(-5deg) skewX(0deg);
+    }
+
+    50% {
+        transform: rotate(5deg) skewX(-6deg);
+    }
+}
+
+@keyframes flagFloat {
+
+    0%, 100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: -12px;
+    }
+}
+
+
+/* ---------- DATE ---------- */
+
+.campaign-date {
+    display: inline-block;
+    padding: 8px 20px;
+    margin-bottom: 15px;
+
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 30px;
+
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+
+    box-shadow: 0 0 20px rgba(255,255,255,0.12);
+}
+
+
+/* ---------- MAIN HEADING ---------- */
+
+.independence-slide h1 {
+    margin: 8px 0;
+
+    color: #ffffff;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 3px 10px rgba(0,0,0,0.5);
+}
+
+.independence-slide h2 {
+    margin: 8px 0;
+
+    color: #ffffff;
+    font-size: clamp(24px, 4vw, 42px);
+    font-weight: 800;
+}
+
+.independence-slide h3 {
+    margin: 8px 0;
+
+    color: #dfffe9;
+    font-size: clamp(20px, 3vw, 30px);
+}
+
+
+/* ---------- TEXT ---------- */
+
+.independence-slide p {
+    max-width: 750px;
+    margin: 10px auto;
+
+    color: #ffffff;
+    font-size: clamp(16px, 2vw, 22px);
+    line-height: 1.7;
+}
+
+.independence-slide strong {
+    margin-top: 8px;
+
+    color: #ffffff;
+    font-size: clamp(17px, 2.5vw, 25px);
+}
+
+.independence-slide small {
+    margin-top: 8px;
+
+    color: #ffffff;
+    font-size: 16px;
+}
+
+
+/* ---------- FLAG SYMBOL ---------- */
+
+.campaign-flag {
+    font-size: clamp(55px, 9vw, 95px);
+    margin-bottom: 5px;
+
+    animation:
+        flagMainWave 2.5s ease-in-out infinite;
+}
+
+@keyframes flagMainWave {
+
+    0%, 100% {
+        transform: rotate(-3deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(3deg) scale(1.06);
+    }
+}
+
+
+/* ---------- SPECIAL 14 AUGUST ---------- */
+
+.final-independence {
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.12),
+            transparent 55%
+        );
+}
+
+.final-independence .campaign-flag {
+    animation:
+        flagMainWave 2s ease-in-out infinite,
+        independenceGlow 2s ease-in-out infinite;
+}
+
+@keyframes independenceGlow {
+
+    0%, 100% {
+        filter: drop-shadow(0 0 5px rgba(255,255,255,0.4));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 25px rgba(255,255,255,0.9));
+    }
+}
+
+
+/* ---------- DOTS ---------- */
+
+.independence-dots {
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+
+    z-index: 20;
+}
+
+.independence-dot {
+    width: 9px;
+    height: 9px;
+
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.45);
+
+    cursor: pointer;
+
+    transition:
+        width 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+.independence-dot.active {
+    width: 28px;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    transform: scale(1.05);
+}
+
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 768px) {
+
+    .independence-campaign,
+    .independence-slider {
+        min-height: 480px;
+    }
+
+    .independence-slide {
+        padding:
+            65px 18px 65px;
+    }
+
+    .animated-flags {
+        font-size: 32px;
+    }
+
+    .campaign-date {
+        font-size: 14px;
+        padding: 7px 15px;
+    }
+
+    .independence-slide p {
+        line-height: 1.6;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .independence-campaign,
+    .independence-slider {
+        min-height: 500px;
+    }
+
+    .animated-flags {
+        font-size: 25px;
+    }
+
+    .independence-slide {
+        padding:
+            70px 14px 65px;
+    }
+
+    .campaign-flag {
+        font-size: 60px;
+    }
+
+}
