@@ -10,119 +10,229 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #080808;
-    color: #ffffff;
+    background: #070707;
+    color: #fff;
     line-height: 1.6;
 }
 
-/* =========================
-   LOADER
-========================= */
-
+/* LOADER */
 #loader {
     position: fixed;
     inset: 0;
-    background: #080808;
+    z-index: 99999;
+    background: #070707;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-    animation: hideLoader 1s ease 2s forwards;
 }
 
-#loader h2 {
-    color: #ff1a1a;
+.loader-content {
     text-align: center;
-    font-size: 28px;
 }
 
-@keyframes hideLoader {
-    to {
-        opacity: 0;
-        visibility: hidden;
+.loader-radio {
+    font-size: 60px;
+    animation: pulse 1s infinite;
+}
+
+.loader-content h2 {
+    color: #ff2020;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.loader-content p {
+    color: #fff;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scale(1.15);
     }
 }
 
-/* =========================
-   LIVE CLOCK
-========================= */
-
-#liveClock {
-    position: fixed;
-    top: 12px;
-    right: 18px;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.75);
-    border: 1px solid #ff1a1a;
-    border-radius: 20px;
-    padding: 7px 14px;
-    color: #ffffff;
-    font-size: 14px;
+/* CLOCK AREA */
+.time-section {
+    background: linear-gradient(135deg, #080808, #260000, #080808);
+    padding: 22px 15px;
+    border-bottom: 2px solid #e00000;
 }
 
-/* =========================
-   HEADER
-========================= */
+.clock-wrapper {
+    max-width: 1050px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+}
 
+/* ANALOG CLOCK */
+.analog-clock {
+    width: 145px;
+    height: 145px;
+    min-width: 145px;
+    border: 5px solid #ff2020;
+    border-radius: 50%;
+    position: relative;
+    background: #111;
+    box-shadow: 0 0 25px rgba(255, 0, 0, .35);
+}
+
+.clock-number {
+    position: absolute;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.n12 {
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.n3 {
+    right: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.n6 {
+    bottom: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.n9 {
+    left: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.clock-hand {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform-origin: bottom center;
+    border-radius: 10px;
+}
+
+.hour-hand {
+    width: 5px;
+    height: 35px;
+    background: #fff;
+}
+
+.minute-hand {
+    width: 4px;
+    height: 48px;
+    background: #ff3030;
+}
+
+.second-hand {
+    width: 2px;
+    height: 56px;
+    background: #ff0000;
+}
+
+.clock-center {
+    width: 10px;
+    height: 10px;
+    background: #ff2020;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+/* DIGITAL CLOCK */
+.digital-area {
+    text-align: left;
+}
+
+.digital-clock {
+    font-family: "Courier New", monospace;
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #fff;
+    text-shadow: 0 0 15px #ff0000;
+}
+
+.clock-status {
+    color: #ff3030;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.date-line {
+    margin-top: 4px;
+    font-size: 15px;
+}
+
+.english-date {
+    color: #fff;
+}
+
+.islamic-date {
+    color: #54d7ff;
+}
+
+.desi-date {
+    color: #ffd34d;
+}
+
+/* HEADER */
 header {
-    background: linear-gradient(135deg, #b00000, #ff0000);
-    padding: 22px 20px;
+    background: linear-gradient(135deg, #c00000, #ff1010);
+    padding: 20px;
     text-align: center;
-    box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
-    position: sticky;
-    top: 0;
-    z-index: 999;
+    box-shadow: 0 5px 20px rgba(0,0,0,.4);
 }
 
 .logo-area h1 {
-    font-size: 32px;
-    margin-bottom: 4px;
+    font-size: 34px;
 }
 
 .logo-area p {
-    font-size: 17px;
-    opacity: 0.95;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
-
 nav {
-    margin-top: 16px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
+    margin-top: 15px;
 }
 
 nav a {
-    color: #ffffff;
+    color: #fff;
     text-decoration: none;
-    padding: 9px 16px;
-    border-radius: 20px;
-    transition: 0.3s;
     font-weight: bold;
+    padding: 9px 16px;
+    border-radius: 25px;
+    transition: .3s;
 }
 
 nav a:hover {
-    background: #ffffff;
-    color: #d00000;
+    background: #fff;
+    color: #c00000;
 }
 
-/* =========================
-   HERO / SLIDER
-========================= */
-
+/* HERO */
 .hero {
-    min-height: 520px;
+    min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     padding: 40px 20px;
     background:
-        linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
+        linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.78)),
         url("https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1600")
         center/cover no-repeat;
 }
@@ -130,83 +240,153 @@ nav a:hover {
 .slider {
     width: 100%;
     max-width: 950px;
+    text-align: center;
 }
 
 .slide {
     display: none;
-    padding: 60px 25px;
-    background: rgba(0,0,0,0.45);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 20px;
-    backdrop-filter: blur(5px);
+    padding: 65px 25px;
+    border-radius: 22px;
+    background: rgba(0,0,0,.58);
+    border: 1px solid rgba(255,255,255,.18);
+    box-shadow: 0 10px 35px rgba(0,0,0,.5);
 }
 
 .slide.active {
     display: block;
+    animation: slideIn .7s ease;
 }
 
-.slide h2 {
-    font-size: 48px;
-    color: #ffffff;
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-icon {
+    font-size: 60px;
     margin-bottom: 12px;
 }
 
-.slide p {
-    font-size: 22px;
-    color: #ff3030;
-    font-weight: bold;
+.slide h2 {
+    font-size: 43px;
+    color: #fff;
 }
 
-/* =========================
-   LIVE PLAYER
-========================= */
+.slide p {
+    font-size: 21px;
+    color: #ff3030;
+    font-weight: bold;
+    margin-top: 10px;
+}
 
+.slider-dots {
+    margin-top: 20px;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #777;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.active-dot {
+    background: #ff2020;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+/* LIVE PLAYER */
 .live-player {
+    padding: 65px 20px;
     text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(180deg, #160000, #090909);
+    background: linear-gradient(180deg, #180000, #080808);
+}
+
+.live-badge {
+    display: inline-block;
+    background: #e00000;
+    padding: 7px 18px;
+    border-radius: 25px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    animation: livePulse 1.5s infinite;
+}
+
+@keyframes livePulse {
+    50% {
+        box-shadow: 0 0 25px rgba(255,0,0,.7);
+    }
 }
 
 .live-player h2 {
-    font-size: 32px;
-    color: #ff2020;
-    margin-bottom: 10px;
+    font-size: 34px;
 }
 
-.live-player p {
-    margin-bottom: 25px;
-    color: #dddddd;
+.live-player > p {
+    color: #ccc;
+    margin: 8px 0 25px;
 }
 
-audio {
-    width: min(700px, 95%);
-    height: 52px;
+.radio-player {
+    max-width: 750px;
+    margin: auto;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #151515;
+    border: 1px solid #333;
+    border-radius: 18px;
 }
 
-.listen-btn {
-    display: inline-block;
-    border: none;
-    cursor: pointer;
+.player-icon {
+    font-size: 45px;
+}
+
+.player-info {
+    flex: 1;
+    text-align: left;
+}
+
+.player-info strong {
+    display: block;
+    font-size: 20px;
+}
+
+.player-info span {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.player-button {
     background: #e00000;
-    color: #ffffff;
-    padding: 13px 28px;
-    border-radius: 30px;
-    font-size: 17px;
-    font-weight: bold;
+    color: #fff;
     text-decoration: none;
-    transition: 0.3s;
+    padding: 12px 22px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: .3s;
 }
 
-.listen-btn:hover {
-    background: #ffffff;
+.player-button:hover {
+    background: #fff;
     color: #d00000;
-    transform: translateY(-2px);
 }
 
-/* =========================
-   SECTIONS
-========================= */
+.player-note {
+    margin-top: 20px;
+    color: #aaa;
+}
 
+/* GENERAL SECTIONS */
 .schedule,
 .rj-team,
 .gallery,
@@ -228,26 +408,19 @@ audio {
 }
 
 .contact {
-    background: #0b0b0b;
+    background: #090909;
 }
 
 .schedule > h2,
 .rj-team > h2,
 .gallery > h2,
 .contact > h2 {
+    color: #ff2020;
     font-size: 32px;
     margin-bottom: 35px;
-    color: #ff2020;
 }
 
-/* =========================
-   PROGRAM CARDS
-========================= */
-
-.schedule {
-    display: block;
-}
-
+/* PROGRAMS */
 .program-card {
     display: inline-block;
     vertical-align: top;
@@ -256,30 +429,26 @@ audio {
     margin: 10px;
     padding: 25px 18px;
     background: #181818;
-    border: 1px solid #333333;
-    border-radius: 15px;
-    transition: 0.3s;
+    border: 1px solid #333;
+    border-radius: 16px;
+    transition: .3s;
 }
 
 .program-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-7px);
     border-color: #ff2020;
-    box-shadow: 0 8px 25px rgba(255,0,0,0.2);
+    box-shadow: 0 8px 25px rgba(255,0,0,.2);
 }
 
 .program-card h3 {
-    color: #ffffff;
     margin-bottom: 10px;
 }
 
 .program-card p {
-    color: #cccccc;
+    color: #bbb;
 }
 
-/* =========================
-   RJ TEAM
-========================= */
-
+/* RJ */
 .team {
     max-width: 1100px;
     margin: auto;
@@ -293,9 +462,9 @@ audio {
     width: 280px;
     padding: 20px;
     background: #151515;
-    border: 1px solid #333333;
+    border: 1px solid #333;
     border-radius: 18px;
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .rj-card:hover {
@@ -312,19 +481,11 @@ audio {
     margin-bottom: 15px;
 }
 
-.rj-card h3 {
-    margin-bottom: 5px;
-    color: #ffffff;
-}
-
 .rj-card p {
-    color: #bbbbbb;
+    color: #aaa;
 }
 
-/* =========================
-   GALLERY
-========================= */
-
+/* GALLERY */
 .gallery-grid {
     max-width: 1100px;
     margin: auto;
@@ -337,9 +498,9 @@ audio {
     width: 100%;
     height: 230px;
     object-fit: cover;
-    border-radius: 14px;
-    border: 1px solid #333333;
-    transition: 0.3s;
+    border-radius: 15px;
+    border: 1px solid #333;
+    transition: .3s;
 }
 
 .gallery-grid img:hover {
@@ -347,13 +508,10 @@ audio {
     border-color: #ff2020;
 }
 
-/* =========================
-   CONTACT
-========================= */
-
+/* CONTACT */
 .contact p {
+    color: #ddd;
     margin: 10px auto;
-    color: #dddddd;
 }
 
 .social {
@@ -362,37 +520,29 @@ audio {
 
 .social a {
     display: inline-block;
-    margin: 7px;
+    margin: 6px;
     padding: 10px 18px;
     border-radius: 25px;
     background: #171717;
-    color: #ffffff;
+    border: 1px solid #333;
+    color: #fff;
     text-decoration: none;
-    border: 1px solid #333333;
-    transition: 0.3s;
 }
 
 .social a:hover {
     background: #e00000;
-    border-color: #e00000;
 }
 
-/* =========================
-   FOOTER
-========================= */
-
+/* FOOTER */
 footer {
-    background: #050505;
-    border-top: 1px solid #222222;
     text-align: center;
+    background: #030303;
+    border-top: 1px solid #222;
     padding: 25px 15px;
-    color: #aaaaaa;
+    color: #aaa;
 }
 
-/* =========================
-   WHATSAPP BUTTON
-========================= */
-
+/* WHATSAPP */
 .whatsapp {
     position: fixed;
     right: 20px;
@@ -403,18 +553,15 @@ footer {
     align-items: center;
     justify-content: center;
     background: #25d366;
-    color: #ffffff;
+    color: #fff;
     border-radius: 50%;
     text-decoration: none;
     font-size: 27px;
     z-index: 1000;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 5px 20px rgba(0,0,0,.5);
 }
 
-/* =========================
-   TOP BUTTON
-========================= */
-
+/* TOP BUTTON */
 #topBtn {
     position: fixed;
     right: 20px;
@@ -424,46 +571,31 @@ footer {
     border: none;
     border-radius: 50%;
     background: #e00000;
-    color: #ffffff;
+    color: #fff;
     cursor: pointer;
     font-size: 20px;
     display: none;
     z-index: 1000;
 }
 
-#topBtn:hover {
-    background: #ffffff;
-    color: #d00000;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
+/* MOBILE */
 @media (max-width: 768px) {
 
-    #liveClock {
-        position: static;
-        display: block;
-        width: fit-content;
-        margin: 8px auto;
+    .clock-wrapper {
+        flex-direction: column;
+        gap: 18px;
     }
 
-    header {
-        position: relative;
+    .digital-area {
+        text-align: center;
+    }
+
+    .digital-clock {
+        font-size: 32px;
     }
 
     .logo-area h1 {
         font-size: 25px;
-    }
-
-    .logo-area p {
-        font-size: 15px;
-    }
-
-    nav a {
-        padding: 7px 11px;
-        font-size: 14px;
     }
 
     .hero {
@@ -475,57 +607,51 @@ footer {
     }
 
     .slide h2 {
-        font-size: 31px;
+        font-size: 30px;
     }
 
     .slide p {
         font-size: 18px;
     }
 
-    .live-player h2 {
-        font-size: 27px;
+    .radio-player {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .player-info {
+        text-align: center;
     }
 
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-
-    .gallery-grid img {
-        height: 180px;
     }
 }
 
 @media (max-width: 480px) {
 
-    .logo-area h1 {
-        font-size: 21px;
-    }
-
-    nav {
-        gap: 4px;
-    }
-
     nav a {
         font-size: 13px;
-        padding: 6px 9px;
+        padding: 7px 10px;
     }
 
-    .hero {
-        min-height: 360px;
+    .analog-clock {
+        width: 125px;
+        height: 125px;
+        min-width: 125px;
+    }
+
+    .digital-clock {
+        font-size: 25px;
+        letter-spacing: 1px;
     }
 
     .slide h2 {
-        font-size: 25px;
+        font-size: 24px;
     }
 
-    .slide p {
-        font-size: 16px;
-    }
-
-    .program-card {
-        width: 90%;
-        max-width: 320px;
+    .slide-icon {
+        font-size: 45px;
     }
 
     .gallery-grid {
@@ -534,6 +660,11 @@ footer {
 
     .gallery-grid img {
         height: 220px;
+    }
+
+    .program-card {
+        width: 90%;
+        max-width: 320px;
     }
 
     .whatsapp {
