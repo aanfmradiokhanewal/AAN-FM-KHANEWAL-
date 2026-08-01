@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (englishElement) {
             englishElement.textContent =
-                "📅 " + englishDate;
+                " " + englishDate;
         }
 
 
