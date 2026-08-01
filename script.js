@@ -1435,3 +1435,425 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+/* =====================================================
+   🇵🇰 AAN FM 91.60 KHANEWAL
+   SPECIAL INDEPENDENCE DAY CAMPAIGN
+   02 AUGUST → 14 AUGUST 2026
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const campaign =
+        document.getElementById("independenceCampaign");
+
+    const slider =
+        document.getElementById("independenceSlider");
+
+    const dotsContainer =
+        document.getElementById("independenceDots");
+
+    if (!campaign || !slider || !dotsContainer) {
+        return;
+    }
+
+
+    /* =================================================
+       CAMPAIGN DATES
+    ================================================= */
+
+    const campaignStart =
+        new Date(2026, 7, 2);
+
+    const campaignEnd =
+        new Date(2026, 7, 15);
+
+
+    const now =
+        new Date();
+
+
+    /* =================================================
+       CHECK CAMPAIGN DATE
+    ================================================= */
+
+    if (
+        now < campaignStart ||
+        now >= campaignEnd
+    ) {
+
+        campaign.style.display = "none";
+
+        return;
+    }
+
+
+    /* =================================================
+       SLIDE DATA
+    ================================================= */
+
+    const campaignSlides = [
+
+        {
+            date: "02 AUGUST 2026",
+            title: "جشنِ آزادی 2026",
+            text: "آزادی کا جشن، محبتِ وطن کے ساتھ۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "03 AUGUST 2026",
+            title: "قائداعظم محمد علی جناح",
+            text: "اتحاد، ایمان اور نظم و ضبط — مضبوط پاکستان کی بنیاد۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "04 AUGUST 2026",
+            title: "علامہ محمد اقبال",
+            text: "خودی، علم، کردار اور بلند مقصد کا پیغام۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "05 AUGUST 2026",
+            title: "آزادی قربانیوں کا ثمر ہے",
+            text: "پاکستان کے قیام کے لیے دی جانے والی قربانیوں کو سلام۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "06 AUGUST 2026",
+            title: "پاکستان — ہماری پہچان",
+            text: "سبز ہلالی پرچم ہماری امید، اتحاد اور شناخت کی علامت ہے۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "07 AUGUST 2026",
+            title: "نوجوان اور پاکستان",
+            text: "آج کے نوجوان کا علم اور کردار، کل کے پاکستان کی طاقت ہے۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "08 AUGUST 2026",
+            title: "اتحاد ہماری طاقت ہے",
+            text: "ایک قوم، ایک وطن، ایک پاکستان۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "09 AUGUST 2026",
+            title: "پاکستان کے معماروں کو سلام",
+            text: "تحریکِ پاکستان کے رہنماؤں اور کارکنوں کو خراجِ تحسین۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "10 AUGUST 2026",
+            title: "آزادی کا سفر",
+            text: "منزل آزادی تھی، سفر جدوجہد اور قربانیوں کا تھا۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "11 AUGUST 2026",
+            title: "قائداعظم کا پیغام",
+            text: "مساوی حقوق، قانون کی حکمرانی اور ذمہ دار شہری — مضبوط پاکستان کی بنیاد۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "12 AUGUST 2026",
+            title: "پاکستان سے محبت",
+            text: "وطن سے محبت صرف الفاظ نہیں، اپنی ذمہ داری پوری کرنا بھی ہے۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "13 AUGUST 2026",
+            title: "جشنِ آزادی کی آمد",
+            text: "کل ہے پاکستان کا دن! اپنے دلوں کو سبز و سفید رنگ دیں۔",
+            message: "Special Independence Day Transmission"
+        },
+
+        {
+            date: "14 AUGUST 2026",
+            title: "جشنِ آزادی مبارک",
+            text: "پاکستان کی آزادی کے 79 سال مکمل ہونے پر پوری قوم کو دل کی گہرائیوں سے مبارکباد۔",
+            message: "HAPPY INDEPENDENCE DAY"
+        }
+
+    ];
+
+
+    /* =================================================
+       CREATE SLIDES
+    ================================================= */
+
+    campaignSlides.forEach(function (item, index) {
+
+        const slide =
+            document.createElement("div");
+
+        slide.className =
+            "independence-slide";
+
+
+        if (index === 0) {
+
+            slide.classList.add("active");
+
+        }
+
+
+        /* ---------- FLAGS ---------- */
+
+        const flags =
+            document.createElement("div");
+
+        flags.className =
+            "animated-flags";
+
+
+        for (let i = 0; i < 5; i++) {
+
+            const flag =
+                document.createElement("span");
+
+            flag.textContent = "🇵🇰";
+
+            flag.style.animationDelay =
+                (i * 0.25) + "s";
+
+            flags.appendChild(flag);
+
+        }
+
+
+        /* ---------- DATE ---------- */
+
+        const date =
+            document.createElement("div");
+
+        date.className =
+            "campaign-date";
+
+        date.textContent =
+            "📅 " + item.date;
+
+
+        /* ---------- FLAG ---------- */
+
+        const mainFlag =
+            document.createElement("div");
+
+        mainFlag.className =
+            "campaign-flag";
+
+        mainFlag.textContent =
+            "🇵🇰";
+
+
+        /* ---------- SPECIAL TRANSMISSION ---------- */
+
+        const transmission =
+            document.createElement("h2");
+
+        transmission.textContent =
+            item.message;
+
+
+        /* ---------- RADIO NAME ---------- */
+
+        const radioName =
+            document.createElement("h1");
+
+        radioName.textContent =
+            "AAN FM 91.60 KHANEWAL";
+
+
+        /* ---------- TITLE ---------- */
+
+        const title =
+            document.createElement("h3");
+
+        title.textContent =
+            item.title;
+
+
+        /* ---------- TEXT ---------- */
+
+        const text =
+            document.createElement("p");
+
+        text.textContent =
+            item.text;
+
+
+        /* ---------- FOOTER ---------- */
+
+        const footer =
+            document.createElement("strong");
+
+        footer.textContent =
+            "Har Dil Ki Awaaz • Happy Independence Day 🇵🇰";
+
+
+        slide.appendChild(flags);
+
+        slide.appendChild(date);
+
+        slide.appendChild(mainFlag);
+
+        slide.appendChild(transmission);
+
+        slide.appendChild(radioName);
+
+        slide.appendChild(title);
+
+        slide.appendChild(text);
+
+        slide.appendChild(footer);
+
+
+        slider.appendChild(slide);
+
+
+        /* =================================================
+           DOT
+        ================================================= */
+
+        const dot =
+            document.createElement("button");
+
+        dot.className =
+            "independence-dot";
+
+
+        if (index === 0) {
+
+            dot.classList.add("active");
+
+        }
+
+
+        dot.setAttribute(
+            "aria-label",
+            item.date
+        );
+
+
+        dot.addEventListener(
+            "click",
+            function () {
+
+                currentSlide =
+                    index;
+
+                showSlide(
+                    currentSlide
+                );
+
+            }
+        );
+
+
+        dotsContainer.appendChild(dot);
+
+    });
+
+
+    const slides =
+        slider.querySelectorAll(
+            ".independence-slide"
+        );
+
+    const dots =
+        dotsContainer.querySelectorAll(
+            ".independence-dot"
+        );
+
+
+    let currentSlide = 0;
+
+
+    /* =================================================
+       SHOW SLIDE
+    ================================================= */
+
+    function showSlide(index) {
+
+        slides.forEach(
+            function (slide) {
+
+                slide.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+        dots.forEach(
+            function (dot) {
+
+                dot.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+        if (slides[index]) {
+
+            slides[index].classList.add(
+                "active"
+            );
+
+        }
+
+
+        if (dots[index]) {
+
+            dots[index].classList.add(
+                "active"
+            );
+
+        }
+
+    }
+
+
+    /* =================================================
+       AUTO SLIDER
+    ================================================= */
+
+    showSlide(0);
+
+
+    setInterval(function () {
+
+        currentSlide++;
+
+
+        if (
+            currentSlide >=
+            slides.length
+        ) {
+
+            currentSlide = 0;
+
+        }
+
+
+        showSlide(
+            currentSlide
+        );
+
+    }, 6000);
+
+
+});
