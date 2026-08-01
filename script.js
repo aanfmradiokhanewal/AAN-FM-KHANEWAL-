@@ -2,10 +2,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        AAN FM 91.60 KHANEWAL
-       LIVE CLOCK + DATES
+       LIVE CLOCK + DATE SYSTEM
+       English + Islamic/Hijri + Desi/Nanakshahi
     ===================================================== */
 
-    const hijriMonthsUrdu = [
+
+    /* =====================================================
+       ISLAMIC / HIJRI MONTHS
+    ===================================================== */
+
+    const hijriMonths = [
         "محرم",
         "صفر",
         "ربیع الاول",
@@ -64,46 +70,28 @@ document.addEventListener("DOMContentLoaded", function () {
             l - 10631 * n + 354;
 
         const j =
-            Math.floor(
-                (10985 - l) / 5316
-            ) *
-            Math.floor(
-                (50 * l) / 17719
-            ) +
+            Math.floor((10985 - l) / 5316) *
+            Math.floor((50 * l) / 17719) +
             Math.floor(l / 5670) *
-            Math.floor(
-                (43 * l) / 15238
-            );
+            Math.floor((43 * l) / 15238);
 
         l =
             l -
-            Math.floor(
-                (30 - j) / 15
-            ) *
-            Math.floor(
-                (17719 * j) / 50
-            ) -
+            Math.floor((30 - j) / 15) *
+            Math.floor((17719 * j) / 50) -
             Math.floor(j / 16) *
-            Math.floor(
-                (15238 * j) / 43
-            ) +
+            Math.floor((15238 * j) / 43) +
             29;
 
         const month =
-            Math.floor(
-                (24 * l) / 709
-            );
+            Math.floor((24 * l) / 709);
 
         const day =
             l -
-            Math.floor(
-                (709 * month) / 24
-            );
+            Math.floor((709 * month) / 24);
 
         const year =
-            30 * n +
-            j -
-            30;
+            30 * n + j - 30;
 
         return {
             day: day,
@@ -119,28 +107,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function getHijriDate(date) {
 
-        const year =
-            date.getFullYear();
-
-        const month =
-            date.getMonth() + 1;
-
-        const day =
-            date.getDate();
-
         const jd =
             gregorianToJulianDay(
-                year,
-                month,
-                day
+                date.getFullYear(),
+                date.getMonth() + 1,
+                date.getDate()
             );
 
         const hijri =
             julianDayToIslamic(jd);
 
         const monthName =
-            hijriMonthsUrdu[hijri.month - 1] ||
-            "";
+            hijriMonths[hijri.month - 1] || "";
 
         return (
             hijri.day +
@@ -154,7 +132,233 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       LIVE TIME
+       DESI / NANAKSHAHI MONTHS
+    ===================================================== */
+
+    const desiMonths = [
+        "Chet",
+        "Vaisakh",
+        "Jeth",
+        "Harh",
+        "Sawan",
+        "Bhadon",
+        "Assu",
+        "Katak",
+        "Maghar",
+        "Poh",
+        "Magh",
+        "Phagun"
+    ];
+
+
+    /* =====================================================
+       DESI / NANAKSHAHI DATE
+    ===================================================== */
+
+    function getDesiDate(date) {
+
+        const year =
+            date.getFullYear();
+
+        const month =
+            date.getMonth();
+
+        const day =
+            date.getDate();
+
+
+        /*
+           Approximate fixed Nanakshahi
+           month starting dates.
+        */
+
+        let desiYear =
+            year - 1468;
+
+        let desiMonthIndex;
+        let desiDay;
+
+
+        /* January 13 → February 11 */
+
+        if (month === 0 && day >= 13) {
+
+            desiMonthIndex = 10;
+            desiDay = day - 12;
+
+        }
+
+
+        /* February 12 → March 13 */
+
+        else if (
+            month === 1 &&
+            day >= 12
+        ) {
+
+            desiMonthIndex = 11;
+            desiDay = day - 11;
+
+        }
+
+
+        /* March 14 → April 13 */
+
+        else if (
+            month === 2 &&
+            day >= 14
+        ) {
+
+            desiMonthIndex = 0;
+            desiDay = day - 13;
+
+        }
+
+
+        /* April 14 → May 14 */
+
+        else if (
+            month === 3 &&
+            day >= 14
+        ) {
+
+            desiMonthIndex = 1;
+            desiDay = day - 13;
+
+        }
+
+
+        /* May 15 → June 14 */
+
+        else if (
+            month === 4 &&
+            day >= 15
+        ) {
+
+            desiMonthIndex = 2;
+            desiDay = day - 14;
+
+        }
+
+
+        /* June 15 → July 15 */
+
+        else if (
+            month === 5 &&
+            day >= 15
+        ) {
+
+            desiMonthIndex = 3;
+            desiDay = day - 14;
+
+        }
+
+
+        /* July 16 → August 15 */
+
+        else if (
+            month === 6 &&
+            day >= 16
+        ) {
+
+            desiMonthIndex = 4;
+            desiDay = day - 15;
+
+        }
+
+
+        /* August 16 → September 14 */
+
+        else if (
+            month === 7 &&
+            day >= 16
+        ) {
+
+            desiMonthIndex = 5;
+            desiDay = day - 15;
+
+        }
+
+
+        /* September 15 → October 14 */
+
+        else if (
+            month === 8 &&
+            day >= 15
+        ) {
+
+            desiMonthIndex = 6;
+            desiDay = day - 14;
+
+        }
+
+
+        /* October 15 → November 13 */
+
+        else if (
+            month === 9 &&
+            day >= 15
+        ) {
+
+            desiMonthIndex = 7;
+            desiDay = day - 14;
+
+        }
+
+
+        /* November 14 → December 13 */
+
+        else if (
+            month === 10 &&
+            day >= 14
+        ) {
+
+            desiMonthIndex = 8;
+            desiDay = day - 13;
+
+        }
+
+
+        /* December 14 → January 12 */
+
+        else if (
+            month === 11 &&
+            day >= 14
+        ) {
+
+            desiMonthIndex = 9;
+            desiDay = day - 13;
+
+        }
+
+
+        /* Dates before current month's start */
+
+        else {
+
+            const previousDate =
+                new Date(
+                    year,
+                    month,
+                    0
+                );
+
+            return getDesiDate(
+                previousDate
+            );
+        }
+
+
+        return {
+            day: desiDay,
+            month: desiMonths[desiMonthIndex],
+            year: desiYear
+        };
+    }
+
+
+    /* =====================================================
+       LIVE CLOCK
     ===================================================== */
 
     function updateTime() {
@@ -180,7 +384,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (displayHour === 0) {
+
             displayHour = 12;
+
         }
 
 
@@ -235,11 +441,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const secondDegree =
             seconds * 6;
 
-
         const minuteDegree =
             minutes * 6 +
             seconds * 0.1;
-
 
         const hourDegree =
             (hours % 12) * 30 +
@@ -302,7 +506,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* =================================================
-           URDU HIJRI DATE
+           ISLAMIC DATE
         ================================================= */
 
         const islamicElement =
@@ -321,24 +525,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* =================================================
-           DESI / PUNJABI MONTH
+           DESI DATE
         ================================================= */
-
-        const desiMonths = [
-            "Chet",
-            "Vaisakh",
-            "Jeth",
-            "Harh",
-            "Sawan",
-            "Bhadon",
-            "Assu",
-            "Katak",
-            "Maghar",
-            "Poh",
-            "Magh",
-            "Phagun"
-        ];
-
 
         const desiElement =
             document.getElementById(
@@ -348,12 +536,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (desiElement) {
 
-            const monthIndex =
-                now.getMonth();
+            const desi =
+                getDesiDate(now);
+
 
             desiElement.textContent =
-                "🌾 Desi Month: " +
-                desiMonths[monthIndex];
+                "🌾 " +
+                desi.day +
+                " " +
+                desi.month +
+                " " +
+                desi.year;
 
         }
 
@@ -389,7 +582,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function showSlide(index) {
 
         if (!slides.length) {
+
             return;
+
         }
 
 
@@ -447,6 +642,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 currentSlide++;
 
+
                 if (
                     currentSlide >=
                     slides.length
@@ -455,6 +651,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     currentSlide = 0;
 
                 }
+
 
                 showSlide(
                     currentSlide
@@ -509,8 +706,7 @@ document.addEventListener("DOMContentLoaded", function () {
             function () {
 
                 if (
-                    window.scrollY >
-                    400
+                    window.scrollY > 400
                 ) {
 
                     topButton.style.display =
@@ -583,7 +779,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
 /* =========================================================
    AAN FM 91.60 KHANEWAL
    FPC — AUGUST & SEPTEMBER 2026
@@ -604,6 +799,7 @@ const fpcSchedule = {
         ["10:00 PM – 12:00 AM", "Love Beats With RJ Nazi Naz", ""]
     ],
 
+
     /* TUESDAY */
     2: [
         ["06:00 AM – 09:00 AM", "Shafqat Bukhari", "Good Morning Pakistan"],
@@ -616,6 +812,7 @@ const fpcSchedule = {
         ["08:00 PM – 10:00 PM", "RJ Shafqat Bukhari", ""],
         ["10:00 PM – 12:00 AM", "RJ Saif ur Rehman Hashmi", ""]
     ],
+
 
     /* WEDNESDAY */
     3: [
@@ -630,6 +827,7 @@ const fpcSchedule = {
         ["10:00 PM – 12:00 AM", "Shafqat Bukhari", "Raat Baat Karti Hai"]
     ],
 
+
     /* THURSDAY */
     4: [
         ["06:00 AM – 09:00 AM", "Shafqat Bukhari", "Good Morning Pakistan"],
@@ -642,6 +840,7 @@ const fpcSchedule = {
         ["08:00 PM – 10:00 PM", "RJ Bilal Shaheen", ""],
         ["10:00 PM – 12:00 AM", "Shafqat Bukhari", "Raat Baat Karti Hai"]
     ],
+
 
     /* FRIDAY */
     5: [
@@ -656,6 +855,7 @@ const fpcSchedule = {
         ["10:00 PM – 12:00 AM", "RJ Khalid Mirza", "Chalo Humjan Hojain"]
     ],
 
+
     /* SATURDAY */
     6: [
         ["06:00 AM – 09:00 AM", "RJ Parviaz Ahmad", "Good Morning Pakistan"],
@@ -669,6 +869,7 @@ const fpcSchedule = {
         ["10:00 PM – 12:00 AM", "RJ Parviaz Ahmad", "Haar Hamelan"]
     ],
 
+
     /* SUNDAY */
     0: [
         ["06:00 AM – 09:00 AM", "RJ Parviaz Ahmad", "Good Morning Pakistan"],
@@ -681,6 +882,7 @@ const fpcSchedule = {
         ["08:00 PM – 10:00 PM", "RJ Munawar Shehzad", ""],
         ["10:00 PM – 12:00 AM", "RJ Tahir Warsi", "Shabe-Ghazal"]
     ]
+
 };
 
 
@@ -753,7 +955,9 @@ const nextMonth =
 function renderFPCalendar() {
 
     if (!calendarDays) {
+
         return;
+
     }
 
 
@@ -880,7 +1084,9 @@ function renderFPCalendar() {
                         thisDate
                     );
 
+
                 renderFPCalendar();
+
 
                 showDailyPrograms(
                     selectedDate
@@ -910,6 +1116,8 @@ function renderFPCalendar() {
 
 function updateCalendarDates(date) {
 
+    /* ---------- ENGLISH ---------- */
+
     const english =
         date.toLocaleDateString(
             "en-PK",
@@ -922,9 +1130,23 @@ function updateCalendarDates(date) {
         );
 
 
-    const hijri =
-        getHijriDate(date);
+    /* ---------- HIJRI ---------- */
 
+    const hijri =
+        getHijriDate(
+            date
+        );
+
+
+    /* ---------- DESI ---------- */
+
+    const desi =
+        getDesiDate(
+            date
+        );
+
+
+    /* ---------- DISPLAY ENGLISH ---------- */
 
     if (calendarEnglish) {
 
@@ -935,6 +1157,8 @@ function updateCalendarDates(date) {
     }
 
 
+    /* ---------- DISPLAY HIJRI ---------- */
+
     if (calendarHijri) {
 
         calendarHijri.textContent =
@@ -944,10 +1168,17 @@ function updateCalendarDates(date) {
     }
 
 
+    /* ---------- DISPLAY DESI ---------- */
+
     if (calendarDesi) {
 
         calendarDesi.textContent =
-            "🌾 Desi Calendar";
+            "🌾 " +
+            desi.day +
+            " " +
+            desi.month +
+            " " +
+            desi.year;
 
     }
 
@@ -969,7 +1200,9 @@ function updateCalendarDates(date) {
 function showDailyPrograms(date) {
 
     if (!dailyProgramList) {
+
         return;
+
     }
 
 
@@ -1056,14 +1289,20 @@ function showDailyPrograms(date) {
                 program[2];
 
 
-            row.appendChild(time);
+            row.appendChild(
+                time
+            );
 
-            row.appendChild(name);
+            row.appendChild(
+                name
+            );
 
 
             if (program[2]) {
 
-                row.appendChild(note);
+                row.appendChild(
+                    note
+                );
 
             }
 
@@ -1144,6 +1383,7 @@ if (prevMonth) {
 
             renderFPCalendar();
 
+
             showDailyPrograms(
                 selectedDate
             );
@@ -1220,6 +1460,7 @@ if (nextMonth) {
 
             renderFPCalendar();
 
+
             showDailyPrograms(
                 selectedDate
             );
@@ -1235,6 +1476,7 @@ if (nextMonth) {
 ========================================================= */
 
 renderFPCalendar();
+
 
 showDailyPrograms(
     selectedDate
