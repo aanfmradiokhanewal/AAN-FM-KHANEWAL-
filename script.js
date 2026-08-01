@@ -91,58 +91,149 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* =================================================
-           ISLAMIC / HIJRI DATE
-           Umm al-Qura Calendar
-        ================================================= */
+        /* =================================================
+   ISLAMIC / HIJRI DATE
+   Urdu Format
+   Example:
+   🌙 19 صفر 1448 ہجری
+================================================= */
 
-        let islamicDate = "";
+const hijriMonths = [
+    "محرم",
+    "صفر",
+    "ربیع الاول",
+    "ربیع الثانی",
+    "جمادی الاول",
+    "جمادی الثانی",
+    "رجب",
+    "شعبان",
+    "رمضان",
+    "شوال",
+    "ذوالقعدہ",
+    "ذوالحجہ"
+];
 
-        try {
+/*
+   Gregorian → Julian Day
+*/
+function gregorianToJulianDay(year, month, day) {
 
-            islamicDate =
-                new Intl.DateTimeFormat(
-                    "en-PK-u-ca-islamic-umalqura",
-                    {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric"
-                    }
-                ).format(now);
+    let a = Math.floor((14 - month) / 12);
 
-        } catch (error) {
+    let y = year + 4800 - a;
 
-            try {
+    let m = month + 12 * a - 3;
 
-                islamicDate =
-                    new Intl.DateTimeFormat(
-                        "en-PK-u-ca-islamic",
-                        {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric"
-                        }
-                    ).format(now);
+    return day +
+        Math.floor((153 * m + 2) / 5) +
+        365 * y +
+        Math.floor(y / 4) -
+        Math.floor(y / 100) +
+        Math.floor(y / 400) -
+        32045;
+}
 
-            } catch (error2) {
 
-                islamicDate = "";
+/*
+   Julian Day → Islamic Civil Date
+*/
+function julianDayToIslamic(jd) {
 
-            }
+    let l = jd - 1948440 + 10632;
 
-        }
+    let n =
+        Math.floor((l - 1) / 10631);
 
-        const islamicElement =
-            document.getElementById("islamicDate");
+    l =
+        l - 10631 * n + 354;
 
-        if (islamicElement) {
+    let j =
+        Math.floor(
+            (10985 - l) / 5316
+        ) *
+        Math.floor(
+            (50 * l) / 17719
+        ) +
+        Math.floor(l / 5670) *
+        Math.floor(
+            (43 * l) / 15238
+        );
 
-            islamicElement.textContent =
-                islamicDate
-                    ? "🌙 " + islamicDate + " AH"
-                    : "🌙 Islamic Date";
+    l =
+        l -
+        Math.floor(
+            (30 - j) / 15
+        ) *
+        Math.floor(
+            (17719 * j) / 50
+        ) -
+        Math.floor(j / 16) *
+        Math.floor(
+            (15238 * j) / 43
+        ) +
+        29;
 
-        }
+    let month =
+        Math.floor(
+            (24 * l) / 709
+        );
 
+    let day =
+        l -
+        Math.floor(
+            (709 * month) / 24
+        );
+
+    let year =
+        30 * n +
+        j -
+        30;
+
+
+    return {
+        day: day,
+        month: month,
+        year: year
+    };
+}
+
+
+/*
+   Get Hijri Date
+*/
+function getHijriDate(date) {
+
+    const year =
+        date.getFullYear();
+
+    const month =
+        date.getMonth() + 1;
+
+    const day =
+        date.getDate();
+
+
+    const jd =
+        gregorianToJulianDay(
+            year,
+            month,
+            day
+        );
+
+
+    const hijri =
+        julianDayToIslamic(jd);
+
+
+    return (
+        hijri.day +
+        " " +
+        hijriMonths[hijri.month - 1] +
+        " " +
+        hijri.year +
+        " ہجری"
+    );
+}
 
         /* =================================================
            DESI / PUNJABI MONTH
