@@ -2492,3 +2492,53 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 60000);
 
 });
+const player = document.getElementById("radioPlayer");
+const playButton = document.getElementById("playButton");
+const volume = document.getElementById("volumeSlider");
+const status = document.getElementById("playerStatus");
+
+playButton.addEventListener("click", function () {
+
+    if (player.paused) {
+
+        player.play();
+
+    } else {
+
+        player.pause();
+
+    }
+
+});
+
+player.addEventListener("play", function () {
+
+    playButton.innerHTML = "⏸ Pause";
+    status.innerHTML = "🔴 LIVE";
+
+});
+
+player.addEventListener("pause", function () {
+
+    playButton.innerHTML = "▶ Listen Live";
+    status.innerHTML = "Paused";
+
+});
+
+player.addEventListener("waiting", function () {
+
+    status.innerHTML = "Buffering...";
+
+});
+
+player.addEventListener("error", function () {
+
+    status.innerHTML = "Stream Offline";
+
+});
+
+volume.addEventListener("input", function () {
+
+    player.volume = this.value;
+
+});
