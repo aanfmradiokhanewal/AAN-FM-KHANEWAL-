@@ -1225,3 +1225,53 @@ footer {
     }
 
 }
+.live-player{
+background:#111;
+padding:20px;
+border-radius:15px;
+text-align:center;
+color:#fff;
+max-width:500px;
+margin:auto;
+}
+
+.live-header{
+font-size:18px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+.live-dot{
+display:inline-block;
+width:12px;
+height:12px;
+background:red;
+border-radius:50%;
+animation:blink 1s infinite;
+margin-right:8px;
+}
+
+@keyframes blink{
+50%{opacity:.2;}
+}
+
+#playButton{
+background:#0a8f3d;
+color:#fff;
+border:none;
+padding:12px 30px;
+border-radius:30px;
+font-size:17px;
+cursor:pointer;
+margin:15px 0;
+}
+
+#volumeSlider{
+width:100%;
+}
+
+#playerStatus{
+margin-top:12px;
+font-weight:bold;
+color:#00ff66;
+}
