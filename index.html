@@ -130,58 +130,32 @@ content="Listen Live AAN FM 91.60 Khanewal - Har Dil Ki Awaaz">
      LIVE RADIO PLAYER
 ===================================================== -->
 
-<section id="live" class="live-player">
+<div class="live-player">
 
-    <div class="live-badge">
-        🔴 LIVE NOW
+    <div class="live-header">
+        <span class="live-dot"></span>
+        <span class="live-text">LIVE ON AIR</span>
     </div>
 
-    <h2>AAN FM 91.60 Khanewal</h2>
+    <audio id="radioPlayer">
+        <source src="https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_28857_stream_340872345" type="audio/mpeg">
+    </audio>
 
-    <p>Har Dil Ki Awaaz</p>
+    <button id="playButton">▶ Listen Live</button>
 
-    <div class="radio-player">
+    <input
+        type="range"
+        id="volumeSlider"
+        min="0"
+        max="1"
+        step="0.01"
+        value="1">
 
-        <div class="player-icon">
-            📻
-        </div>
-
-        <div class="player-info">
-
-            <strong>AAN FM 91.60</strong>
-
-            <span>
-                🔴 Live Radio • Khanewal
-            </span>
-
-        </div>
-
-        <div class="live-audio-box">
-
-            <audio
-                id="aanLivePlayer"
-                controls
-                preload="none"
-                playsinline
-                style="width:100%;">
-
-                <source
-                    src="https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_28857_stream_340872345"
-                    type="audio/mpeg">
-
-                Your browser does not support the audio player.
-
-            </audio>
-
-        </div>
-
+    <div id="playerStatus">
+        Ready to Play
     </div>
 
-    <p class="player-note">
-        🎧 Press ▶ to listen to AAN FM 91.60 Live
-    </p>
-
-</section>
+</div>
     
 <!-- FPC CALENDAR -->
 <section class="live-calendar" id="programCalendar">
