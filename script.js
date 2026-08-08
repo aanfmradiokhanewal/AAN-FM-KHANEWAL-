@@ -2492,53 +2492,61 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 60000);
 
 });
-const player = document.getElementById("radioPlayer");
-const playButton = document.getElementById("playButton");
-const volume = document.getElementById("volumeSlider");
-const status = document.getElementById("playerStatus");
+document.addEventListener("DOMContentLoaded", function () {
 
-playButton.addEventListener("click", function () {
+    const player = document.getElementById("radioPlayer");
+    const playButton = document.getElementById("playButton");
+    const volume = document.getElementById("volumeSlider");
+    const status = document.getElementById("playerStatus");
 
-    if (player.paused) {
+    if (!player || !playButton || !volume || !status) return;
 
-        player.play();
+    player.src = "https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_28857_stream_747516428";
+    player.volume = 1;
 
-    } else {
+    playButton.addEventListener("click", function () {
 
-        player.pause();
+        if (player.paused) {
 
-    }
+            status.textContent = "Connecting...";
 
-});
+            player.play().catch(function () {
+                status.textContent = "❌ Unable to play stream";
+            });
 
-player.addEventListener("play", function () {
+        } else {
 
-    playButton.innerHTML = "⏸ Pause";
-    status.innerHTML = "🔴 LIVE";
+            player.pause();
 
-});
+        }
 
-player.addEventListener("pause", function () {
+    });
 
-    playButton.innerHTML = "▶ Listen Live";
-    status.innerHTML = "Paused";
+    player.addEventListener("playing", function () {
+        playButton.textContent = "⏸ Pause";
+        status.textContent = "🔴 LIVE";
+    });
 
-});
+    player.addEventListener("waiting", function () {
+        status.textContent = "⏳ Buffering...";
+    });
 
-player.addEventListener("waiting", function () {
+    player.addEventListener("pause", function () {
+        playButton.textContent = "▶ Listen Live";
+        status.textContent = "Paused";
+    });
 
-    status.innerHTML = "Buffering...";
+    player.addEventListener("stalled", function () {
+        status.textContent = "⏳ Reconnecting...";
+    });
 
-});
+    player.addEventListener("error", function () {
+        playButton.textContent = "▶ Listen Live";
+        status.textContent = "❌ Stream unavailable";
+    });
 
-player.addEventListener("error", function () {
-
-    status.innerHTML = "Stream Offline";
-
-});
-
-volume.addEventListener("input", function () {
-
-    player.volume = this.value;
+    volume.addEventListener("input", function () {
+        player.volume = Number(this.value);
+    });
 
 });
