@@ -2550,3 +2550,245 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+/* =====================================================
+   AAN FM 91.60
+   GALLERY + RJ PROFILE FUNCTIONS
+===================================================== */
+
+const rjProfiles = {
+
+    nazi: {
+        name: "RJ Nazi Naaz",
+        image: "images/rj-nazi-naaz.jpg",
+        programs: ["Love Beats With"],
+        bio: "RJ Nazi Naaz brings entertainment, music and engaging radio moments to the listeners of AAN FM 91.60 Khanewal."
+    },
+
+    "maher-akmal": {
+        name: "RJ Maher Akmal Sial",
+        image: "images/rj-maher-akmal-sial-1.jpg",
+        programs: [
+            "Maher Diyan Gallan",
+            "Aap Aur Hum"
+        ],
+        bio: "RJ Maher Akmal Sial is one of the voices featured on AAN FM 91.60 Khanewal."
+    },
+
+    latif: {
+        name: "RJ Latif Khan Qalandrani",
+        image: "images/rj-latif-khan-qalandrani.jpg",
+        programs: [
+            "Nasib Rang",
+            "Sukh Sanehry"
+        ],
+        bio: "RJ Latif Khan Qalandrani brings his distinctive radio style to AAN FM 91.60 Khanewal."
+    },
+
+    gn: {
+        name: "RJ GN Khan",
+        image: "images/rj-gn-khan.jpg",
+        programs: [
+            "AAN FM 91.60 Khanewal"
+        ],
+        bio: "RJ GN Khan is part of the AAN FM 91.60 Khanewal radio team."
+    },
+
+    muskaan: {
+        name: "RJ Muskaan",
+        image: "images/rj-muskaan.jpg",
+        programs: [
+            "Pothwar Ne Rang"
+        ],
+        bio: "RJ Muskaan is part of the AAN FM 91.60 Khanewal team."
+    },
+
+    abdul: {
+        name: "RJ Abdul Razaq Zahid",
+        image: "images/rj-abdul-razaq-zahid.jpg",
+        programs: [
+            "Ravi Day Rang"
+        ],
+        bio: "RJ Abdul Razaq Zahid is one of the voices of AAN FM 91.60 Khanewal."
+    },
+
+    bilal: {
+        name: "RJ Bilal Shaheen",
+        image: "images/rj-bilal-shaheen.jpg",
+        programs: [
+            "AAN FM 91.60 Khanewal"
+        ],
+        bio: "RJ Bilal Shaheen is part of the AAN FM 91.60 Khanewal broadcasting team."
+    },
+
+    khasta: {
+        name: "RJ Khasta Gull",
+        image: "images/rj-khasta-gull.jpg",
+        programs: [
+            "Gull Di Mehfil"
+        ],
+        bio: "RJ Khasta Gull brings entertainment and radio interaction to AAN FM 91.60 Khanewal."
+    },
+
+    waseem: {
+        name: "RJ Waseem Sajjad",
+        image: "images/rj-waseem-sajjad.jpg",
+        programs: [
+            "Zindagi Kay Rang"
+        ],
+        bio: "RJ Waseem Sajjad is part of the AAN FM 91.60 Khanewal radio family."
+    },
+
+    hafeez: {
+        name: "RJ Maher Hafeez",
+        image: "images/rj-maher-hafeez.jpg",
+        programs: [
+            "Mix Music"
+        ],
+        bio: "RJ Maher Hafeez is one of the voices bringing music and entertainment to AAN FM 91.60 Khanewal."
+    },
+
+    tahir: {
+        name: "RJ Tahir Warsi",
+        image: "images/rj-tahir-warsi.jpg",
+        programs: [
+            "Shab-e-Ghazal"
+        ],
+        bio: "RJ Tahir Warsi presents his distinctive radio style on AAN FM 91.60 Khanewal."
+    },
+
+    saif: {
+        name: "Saif ur Rehman Hashmi",
+        image: "images/rj-saif-ur-rehman-hashmi.jpg",
+        programs: [
+            "Shabistan"
+        ],
+        bio: "Saif ur Rehman Hashmi is part of the AAN FM 91.60 Khanewal broadcasting team."
+    }
+
+};
+
+
+/* =========================
+   POSTER LIGHTBOX
+========================= */
+
+function openPoster(src) {
+
+    const lightbox =
+        document.getElementById("posterLightbox");
+
+    const preview =
+        document.getElementById("posterPreview");
+
+    if (!lightbox || !preview) {
+        return;
+    }
+
+    preview.src = src;
+
+    lightbox.style.display = "flex";
+
+    document.body.style.overflow = "hidden";
+}
+
+
+function closePoster() {
+
+    const lightbox =
+        document.getElementById("posterLightbox");
+
+    if (!lightbox) {
+        return;
+    }
+
+    lightbox.style.display = "none";
+
+    document.body.style.overflow = "";
+}
+
+
+/* =========================
+   RJ PROFILE
+========================= */
+
+function showRJ(id) {
+
+    const data =
+        rjProfiles[id];
+
+    if (!data) {
+        return;
+    }
+
+    document.getElementById("rjModalImage").src =
+        data.image;
+
+    document.getElementById("rjModalName").textContent =
+        data.name;
+
+    document.getElementById("rjModalBio").textContent =
+        data.bio;
+
+    const programs =
+        document.getElementById("rjModalPrograms");
+
+    programs.innerHTML = "";
+
+    data.programs.forEach(function(program) {
+
+        const item =
+            document.createElement("div");
+
+        item.textContent =
+            "🎙️ " + program;
+
+        item.style.margin =
+            "8px 0";
+
+        item.style.fontWeight =
+            "700";
+
+        programs.appendChild(item);
+
+    });
+
+    document.getElementById("rjModal").style.display =
+        "flex";
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+function closeRJ() {
+
+    const modal =
+        document.getElementById("rjModal");
+
+    if (!modal) {
+        return;
+    }
+
+    modal.style.display =
+        "none";
+
+    document.body.style.overflow =
+        "";
+}
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener("keydown", function(e) {
+
+    if (e.key === "Escape") {
+
+        closePoster();
+
+        closeRJ();
+
+    }
+
+});
