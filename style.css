@@ -1549,3 +1549,386 @@ color:#00ff66;
     }
 
 }
+/* =====================================================
+   AAN FM 91.60 KHANEWAL
+   PROFESSIONAL GREEN + WHITE + GOLD THEME
+===================================================== */
+
+:root {
+    --aan-green: #00843D;
+    --aan-dark-green: #005C2A;
+    --aan-deep-green: #003D1D;
+    --aan-gold: #D4AF37;
+    --aan-light: #F5FFF8;
+    --aan-dark: #07110B;
+    --aan-card: #0D1B13;
+}
+
+/* BODY */
+body {
+    background: var(--aan-dark);
+    color: #fff;
+}
+
+/* LOADER */
+#loader {
+    background: var(--aan-dark);
+}
+
+.loader-content h2 {
+    color: var(--aan-green);
+}
+
+/* CLOCK */
+.time-section {
+    background: linear-gradient(
+        135deg,
+        #07110B,
+        #003D1D,
+        #07110B
+    );
+    border-bottom: 2px solid var(--aan-green);
+}
+
+.analog-clock {
+    border-color: var(--aan-green);
+    background: #0D1B13;
+    box-shadow: 0 0 25px rgba(0,132,61,.35);
+}
+
+.minute-hand {
+    background: #22B866;
+}
+
+.second-hand {
+    background: var(--aan-gold);
+}
+
+.clock-center {
+    background: var(--aan-green);
+}
+
+.digital-clock {
+    text-shadow: 0 0 15px rgba(0,132,61,.8);
+}
+
+.clock-status {
+    color: #22B866;
+}
+
+.islamic-date {
+    color: #70D7A0;
+}
+
+.desi-date {
+    color: var(--aan-gold);
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(
+        135deg,
+        #006B32,
+        #00843D,
+        #005C2A
+    );
+}
+
+/* NAV */
+nav a:hover {
+    background: #fff;
+    color: var(--aan-green);
+}
+
+/* HERO */
+.hero {
+    background:
+        linear-gradient(
+            rgba(0,20,10,.70),
+            rgba(0,0,0,.82)
+        ),
+        url("https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1600")
+        center/cover no-repeat;
+}
+
+.slide {
+    background: rgba(0,30,15,.65);
+    border-color: rgba(255,255,255,.18);
+}
+
+.slide p {
+    color: #39C978;
+}
+
+.active-dot {
+    background: var(--aan-green);
+    box-shadow: 0 0 10px rgba(0,132,61,.8);
+}
+
+/* LIVE PLAYER */
+.live-player {
+    background:
+        linear-gradient(
+            180deg,
+            #0D2416,
+            #07110B
+        );
+}
+
+.live-badge {
+    background: var(--aan-green);
+}
+
+.radio-player {
+    background: var(--aan-card);
+    border-color: #1B3A28;
+}
+
+.player-button {
+    background: var(--aan-green);
+}
+
+.player-button:hover {
+    background: #fff;
+    color: var(--aan-green);
+}
+
+/* GENERAL SECTIONS */
+.schedule {
+    background: #09150E;
+}
+
+.rj-team {
+    background: #06100A;
+}
+
+.gallery {
+    background: #09150E;
+}
+
+.contact {
+    background: #07110B;
+}
+
+.schedule > h2,
+.rj-team > h2,
+.gallery > h2,
+.contact > h2 {
+    color: #39C978;
+}
+
+/* PROGRAM CARDS */
+.program-card {
+    background: var(--aan-card);
+    border-color: #1B3A28;
+}
+
+.program-card:hover {
+    border-color: var(--aan-green);
+    box-shadow: 0 8px 25px rgba(0,132,61,.25);
+}
+
+/* RJ */
+.rj-card {
+    background: var(--aan-card);
+    border-color: #1B3A28;
+}
+
+.rj-card:hover {
+    border-color: var(--aan-green);
+}
+
+.rj-card img {
+    border-color: var(--aan-green);
+}
+
+/* OLD GALLERY */
+.gallery-grid img:hover {
+    border-color: var(--aan-green);
+}
+
+/* SOCIAL */
+.social a {
+    background: var(--aan-card);
+    border-color: #1B3A28;
+}
+
+.social a:hover {
+    background: var(--aan-green);
+}
+
+/* TOP BUTTON */
+#topBtn {
+    background: var(--aan-green);
+}
+
+#topBtn:hover {
+    background: var(--aan-gold);
+    color: #07110B;
+}
+
+/* FPC CALENDAR */
+.live-calendar {
+    background:
+        linear-gradient(
+            145deg,
+            #0D2416,
+            #07110B
+        );
+    border-color: #1B3A28;
+}
+
+.calendar-header h2 {
+    color: #39C978;
+}
+
+.calendar-header button {
+    background: var(--aan-green);
+}
+
+.calendar-header button:hover {
+    background: #fff;
+    color: var(--aan-green);
+}
+
+.calendar-weekdays span {
+    color: #39C978;
+}
+
+.calendar-day {
+    background: #102218;
+    border-color: #1B3A28;
+}
+
+.calendar-day:hover {
+    background: #183A27;
+    border-color: var(--aan-green);
+}
+
+.calendar-day.today {
+    background: var(--aan-green);
+    box-shadow: 0 0 18px rgba(0,132,61,.55);
+}
+
+.calendar-day.selected {
+    outline-color: var(--aan-gold);
+}
+
+#calendarHijri {
+    color: #70D7A0;
+}
+
+#calendarDesi {
+    color: var(--aan-gold);
+}
+
+.daily-programs h3 {
+    color: #39C978;
+}
+
+.program-row {
+    background: #102218;
+    border-left-color: var(--aan-green);
+}
+
+.program-time {
+    color: var(--aan-gold);
+}
+
+/* LIVE AUDIO */
+#playButton {
+    background: var(--aan-green);
+}
+
+#playerStatus {
+    color: #39C978;
+}
+
+/* FOOTER */
+footer {
+    background: #020805;
+    border-top-color: #173322;
+}
+
+/* =====================================================
+   GALLERY + RJ NEW SECTION
+===================================================== */
+
+.aan-section {
+    background: transparent;
+}
+
+.aan-gallery-card,
+.aan-rj-card {
+    background:
+        linear-gradient(
+            145deg,
+            #102218,
+            #08130D
+        );
+    border-color: #1B3A28;
+}
+
+.aan-gallery-card:hover,
+.aan-rj-card:hover {
+    box-shadow: 0 15px 35px rgba(0,132,61,.20);
+}
+
+.aan-rj-card img {
+    border-color: var(--aan-green);
+}
+
+.aan-rj-card button {
+    background: var(--aan-green);
+}
+
+.aan-rj-card button:hover {
+    background: var(--aan-gold);
+    color: #07110B;
+}
+
+/* RJ MODAL */
+.aan-rj-modal-box {
+    background: #F5FFF8;
+    color: #122017;
+}
+
+.aan-rj-modal-box img {
+    border-color: var(--aan-green);
+}
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+.whatsapp {
+    background: #25D366;
+}
+
+/* =====================================================
+   GOLD ACCENTS
+===================================================== */
+
+.campaign-date {
+    border-color: rgba(212,175,55,.6);
+}
+
+.calendar-day.selected {
+    box-shadow: 0 0 15px rgba(212,175,55,.25);
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    header {
+        background: linear-gradient(
+            135deg,
+            #006B32,
+            #00843D
+        );
+    }
+
+}
