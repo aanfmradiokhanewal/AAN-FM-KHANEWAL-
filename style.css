@@ -1275,3 +1275,277 @@ margin-top:12px;
 font-weight:bold;
 color:#00ff66;
 }
+/* =====================================================
+   AAN FM 91.60 KHANEWAL
+   GALLERY + RJs
+===================================================== */
+
+.aan-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.aan-section-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.aan-section-heading span {
+    font-size: 42px;
+}
+
+.aan-section-heading h2 {
+    margin: 8px 0;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.aan-section-heading p {
+    margin: 0;
+    opacity: .75;
+}
+
+
+/* =========================
+   GALLERY
+========================= */
+
+.aan-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.aan-gallery-card {
+    overflow: hidden;
+    border-radius: 18px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(0,0,0,.12);
+    box-shadow: 0 8px 25px rgba(0,0,0,.12);
+    transition: .3s ease;
+}
+
+.aan-gallery-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(0,0,0,.2);
+}
+
+.aan-gallery-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+}
+
+.aan-gallery-info {
+    padding: 16px;
+    text-align: center;
+}
+
+.aan-gallery-info h3 {
+    margin: 0 0 8px;
+    font-size: 19px;
+}
+
+.aan-gallery-info p {
+    margin: 5px 0;
+    font-weight: 600;
+}
+
+.aan-gallery-info span {
+    font-size: 13px;
+    opacity: .7;
+}
+
+
+/* =========================
+   MEET OUR RJs
+========================= */
+
+.aan-rj-section {
+    margin-top: 70px;
+}
+
+.aan-rj-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.aan-rj-card {
+    text-align: center;
+    padding: 18px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(0,0,0,.12);
+    box-shadow: 0 8px 25px rgba(0,0,0,.12);
+    transition: .3s ease;
+}
+
+.aan-rj-card:hover {
+    transform: translateY(-7px);
+}
+
+.aan-rj-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #168a45;
+}
+
+.aan-rj-card h3 {
+    margin: 15px 0 7px;
+}
+
+.aan-rj-card p {
+    min-height: 40px;
+    font-size: 14px;
+    opacity: .75;
+}
+
+.aan-rj-card button {
+    border: 0;
+    padding: 10px 18px;
+    border-radius: 30px;
+    background: #168a45;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+.aan-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(0,0,0,.92);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.aan-lightbox img {
+    max-width: 95%;
+    max-height: 92vh;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.aan-lightbox-close {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    background: transparent;
+    border: 0;
+    color: white;
+    font-size: 45px;
+    cursor: pointer;
+}
+
+
+/* =========================
+   RJ MODAL
+========================= */
+
+.aan-rj-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99998;
+    background: rgba(0,0,0,.8);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.aan-rj-modal-box {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    color: #222;
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.aan-rj-modal-box img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #168a45;
+}
+
+.aan-rj-modal-box h2 {
+    margin: 18px 0 12px;
+}
+
+.aan-rj-modal-box p {
+    line-height: 1.7;
+}
+
+.aan-modal-close {
+    position: absolute;
+    right: 18px;
+    top: 12px;
+    border: 0;
+    background: transparent;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+    .aan-gallery-grid,
+    .aan-rj-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .aan-section {
+        padding: 12px;
+        margin: 35px auto;
+    }
+
+    .aan-section-heading h2 {
+        font-size: 26px;
+    }
+
+    .aan-gallery-grid,
+    .aan-rj-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .aan-gallery-card img {
+        height: auto;
+        max-height: 500px;
+    }
+
+    .aan-rj-card img {
+        width: 130px;
+        height: 130px;
+    }
+
+}
