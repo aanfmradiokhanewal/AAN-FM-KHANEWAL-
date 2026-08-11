@@ -129,13 +129,14 @@ content="Listen Live AAN FM 91.60 Khanewal - Har Dil Ki Awaaz">
      AAN FM 91.60 KHANEWAL
      LIVE RADIO PLAYER
 ===================================================== -->
+
 <div class="live-player">
 
     <div class="live-header">
         <span class="live-dot"></span>
         <span class="live-text">LIVE ON AIR</span>
     </div>
-https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_28857_stream_747516428
+
     <button id="playButton">▶ Listen Live</button>
 
     <input
@@ -151,6 +152,65 @@ https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_28857_stream_74
     </div>
 
 </div>
+
+<script>
+
+const radioPlayer = new Audio(
+    "https://uk15freenew.listen2myradio.com/live.mp3?typeportmount=s1_28857_stream_747516428"
+);
+
+radioPlayer.preload = "none";
+radioPlayer.volume = 1;
+
+const playButton = document.getElementById("playButton");
+const volumeSlider = document.getElementById("volumeSlider");
+const playerStatus = document.getElementById("playerStatus");
+
+playButton.addEventListener("click", function () {
+
+    if (radioPlayer.paused) {
+
+        playerStatus.textContent = "Connecting to AAN FM...";
+
+        radioPlayer.play()
+            .then(function () {
+
+                playButton.textContent = "⏸ Stop Live";
+                playerStatus.textContent =
+                    "🔴 LIVE — AAN FM 91.60 Khanewal";
+
+            })
+            .catch(function () {
+
+                playerStatus.textContent =
+                    "⚠️ Stream unavailable";
+
+            });
+
+    } else {
+
+        radioPlayer.pause();
+
+        playButton.textContent = "▶ Listen Live";
+        playerStatus.textContent = "Ready to Play";
+
+    }
+
+});
+
+volumeSlider.addEventListener("input", function () {
+
+    radioPlayer.volume = this.value;
+
+});
+
+radioPlayer.addEventListener("error", function () {
+
+    playerStatus.textContent = "⚠️ Stream unavailable";
+
+});
+
+</script>
     
 <!-- FPC CALENDAR -->
 <section class="live-calendar" id="programCalendar">
